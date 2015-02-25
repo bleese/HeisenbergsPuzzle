@@ -42,8 +42,26 @@ public class MazeLoader : MonoBehaviour {
 				}
 			}
 	 		
+	 		float state = 0f;
+	 		// For antimatter state determines if it is antimatter or matter. 0 = antimatter, 1 = matter
+			if (env.tag == "AntiMatter" && env.GetComponent<AntiMatterScript>().isMatter) {
+	 			state = 1f;
+	 		// For Magnetic field state refers to whether or not the magnetic field is into our out of page. 0 = into, 1 = out of
+	 		} else if (env.tag == "MField" && env.GetComponent<MagneticFieldScript>().direction) {
+	 			state = 1f;
+	 		// Whether or not the teleporter is activated, 0 = no, 1 = yes
+	 		} else if (env.tag == "Teleporter" && env.GetComponent<TeleporterScript>().enabled) {
+	 			state = 1f;
+	 		// Whether or not the Measurer is measuring momentem or position. 0 for position, 1 for momentum
+	 		} else if (env.tag == "Measurer" && env.GetComponent<MeasurerScript>().pORxMeasure) {
+	 			state = 1f;
+	 		// Whether or not the spawn is a player spawn or not
+	 		} else if (env.tag == "Spawn" && env.GetComponent<SpawnScript>().playerSpawn) {
+	 			state = 1f;
+	 		}
+	 		// Determining the state of the object, in terms of rotation or what-not
+	 		
 	 		/*
-	 		state
 	 		if(env.tag == dg) {
 	 		
 	 		
@@ -51,7 +69,7 @@ public class MazeLoader : MonoBehaviour {
 
 	 		}
 	 		*/
-	 		mazeSet.Add (new ObjectSet(env.transform.position, env.transform.rotation, env.transform.localScale, envName));
+	 		mazeSet.Add (new ObjectSet(env.transform.position, env.transform.rotation, env.transform.localScale, envName, state));
 	 		
 	 	}
 	 	
@@ -132,9 +150,9 @@ public class MazeLoader : MonoBehaviour {
 			string objectName = "Object"+i;
 			
 			//JSON Format, creates the JSON format through the mazeJSON Node
-			mazeJSON[objectName]["Position"]["x"].AsDouble = mazeObj.postion.x;
-			mazeJSON[objectName]["Position"]["y"].AsDouble = mazeObj.postion.y;
-			mazeJSON[objectName]["Position"]["z"].AsDouble = mazeObj.postion.z;
+			mazeJSON[objectName]["Position"]["x"].AsDouble = mazeObj.position.x;
+			mazeJSON[objectName]["Position"]["y"].AsDouble = mazeObj.position.y;
+			mazeJSON[objectName]["Position"]["z"].AsDouble = mazeObj.position.z;
 			
 			mazeJSON[objectName]["Rotation"]["x"].AsDouble = mazeObj.rotation.x;
 			mazeJSON[objectName]["Rotation"]["y"].AsDouble = mazeObj.rotation.y;
@@ -144,7 +162,7 @@ public class MazeLoader : MonoBehaviour {
 			mazeJSON[objectName]["Scale"]["y"].AsDouble = mazeObj.scale.y;
 			mazeJSON[objectName]["Scale"]["z"].AsDouble = mazeObj.scale.z;
 			
-			//mazeJSON[objectName]["State"].AsBool = mazeObj.state;
+			mazeJSON[objectName]["State"].AsFloat = mazeObj.toggleState;
 			
 			mazeJSON[objectName]["Name"] = mazeObj.name;
 			
@@ -208,15 +226,16 @@ public class MazeLoader : MonoBehaviour {
 			Vector3 tempPosition = new Vector3(mazeJSON[i]["Position"]["x"].AsFloat,mazeJSON[i]["Position"]["y"].AsFloat, mazeJSON[i]["Position"]["z"].AsFloat);
 			Quaternion tempRotation = new Quaternion(mazeJSON[i]["Rotation"]["x"].AsFloat,mazeJSON[i]["Rotation"]["y"].AsFloat, mazeJSON[i]["Rotation"]["z"].AsFloat, 0);
 			Vector3 tempScale = new Vector3(mazeJSON[i]["Scale"]["x"].AsFloat,mazeJSON[i]["Scale"]["y"].AsFloat, mazeJSON[i]["Scale"]["z"].AsFloat);
-		
-			ObjectSet tempObject = new ObjectSet(tempPosition,tempRotation,tempScale,tempName);
+			float state = mazeJSON[i]["State"].AsFloat;
+			ObjectSet tempObject = new ObjectSet(tempPosition,tempRotation,tempScale,tempName, state);
 			envObjects.Add(tempObject);
 			
 		}
 		
 		
 		foreach(ObjectSet tempObject in envObjects) {
-			Debug.Log (tempObject.name + ": " + tempObject.postion.ToString("F3") + " " + tempObject.rotation.ToString("F3") + " " + tempObject.scale.ToString("F3") );
+			EditorManagerScript.Instance.Create (tempObject);
+			//Debug.Log (tempObject.name + ": " + tempObject.position.ToString("F3") + " " + tempObject.rotation.ToString("F3") + " " + tempObject.scale.ToString("F3") );
 		}
 		
 		

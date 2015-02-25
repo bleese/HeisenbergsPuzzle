@@ -5,7 +5,7 @@ public class AntiMatterScript : MonoBehaviour, IEnvironmentObject {
 	private bool entity = true;
 	private float pushconstant = 30f;
 	private UniversalHelperScript universalHelper;
-	private bool isMatter = true; // Whether or not the antimatter is antimatter or simply matter
+	public bool isMatter = true; // Whether or not the antimatter is antimatter or simply matter
 	public Sprite antiMatter; // Sprite for field lines going into page
 	public Sprite matter; // Sprite for field lines going out of the page
 	private SpriteRenderer spriteRenderer; // Object to actually render the sprites
@@ -85,4 +85,5 @@ public class AntiMatterScript : MonoBehaviour, IEnvironmentObject {
 	void FixedUpdate () {
 		
 	}
+
 }

@@ -4,7 +4,7 @@ using System.Collections;
 public class TeleporterScript : MonoBehaviour, IEnvironmentObject {
 	private UniversalHelperScript universalHelper;
 	private bool entity = true; // Whether or not the teleporter does its thing
-	private bool activated = false; // Whether or not this is the ACTIVE responder teleporter
+	public bool activated = false; // Whether or not this is the ACTIVE responder teleporter
 	private bool alreadyEntered = false; // Whether or not the player only entered this collider due to teleporting to it
 	public Sprite unactive; // Sprite for field lines going into page
 	public Sprite activeSprite; // Sprite for field lines going out of the page

@@ -6,7 +6,7 @@ public class MagneticFieldScript : MonoBehaviour, IEnvironmentObject {
 	// Into is considered True; out of is considered False
 	// Based on the Right Hand Rule (Remember first year physics) the magnetic field will apply a force normal to the direction of velocity
 	// This will mean, unlike the electric field, the magnetic field will curve the electron with a force proportional to the speed of the electron
-	bool direction; // True = into page, False = out of page
+	public bool direction; // True = into page, False = out of page
 	float power = 40;
 	private bool resizeDirection = false; // False = x direction, True = y direction
 	private bool force = true; // whether or not a force is applied

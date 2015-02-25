@@ -5,7 +5,7 @@ public class MeasurerScript : MonoBehaviour, IEnvironmentObject {
     private UniversalHelperScript universalHelper;
 	private bool resizeDirection = false; // False = x direction, true = y direction
 	private bool entityEnabled = true; // Will the measurer measure?
-	private bool pORxMeasure = false; // False to measure MOMENTUM, true to measure POSITION
+	public bool pORxMeasure = false; // False to measure MOMENTUM, true to measure POSITION
 	public Sprite pMeasure; // Sprite for momentum measurer
 	public Sprite xMeasure; // Sprite for position measurer
 	private SpriteRenderer spriteRenderer; // Object to actually render the sprites
