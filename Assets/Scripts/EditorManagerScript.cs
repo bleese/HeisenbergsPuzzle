@@ -13,19 +13,20 @@ using System.Collections.Generic;
 // NOTE TEMPORARY CLASS
 public class ObjectSet {
 	
-	public Vector3 postion; //transform.position
+	public Vector3 position; //transform.position
 	public Quaternion rotation; //transform.rotation
 	public Vector3 scale; //transfrom.scale
 	public string name; //name of game object
+	public float toggleState; // Will be different for different objects, but is a simple number that refers to the state of the object
 	
 	//Initialise Objects properties 
-	public ObjectSet (Vector3 pos, Quaternion rot, Vector3 sca, string obName) {
+	public ObjectSet (Vector3 pos, Quaternion rot, Vector3 sca, string obName, float toggleState) {
 		
-		postion = pos;
+		position = pos;
 		rotation = rot;
 		scale = sca;
 		name = obName;
-		
+		this.toggleState = toggleState;
 	}
 	
 }
@@ -108,6 +109,49 @@ public class EditorManagerScript : MonoBehaviour {
 				SetEntityField();
 			}
 		}
+	}
+	
+	// An overloaded create function for level loading, if we already know where the object will be
+	public void Create(ObjectSet obj) {
+		GameObject tempEnv;
+		if (obj.name.Contains ("Barrier")) {
+			tempEnv = Instantiate (wall,obj.position, obj.rotation) as GameObject;
+			tempEnv.transform.localScale = obj.scale;
+		} else if (obj.name.Contains("AntiMatter")) {
+			tempEnv = Instantiate (antiMatter,obj.position, obj.rotation) as GameObject;
+			tempEnv.transform.localScale = obj.scale;	
+			if (obj.toggleState == 1) {
+				tempEnv.GetComponent<AntiMatterScript>().Flip();
+			}
+		}  else if (obj.name.Contains("ElectricField")) {
+			tempEnv = Instantiate (efield,obj.position, obj.rotation) as GameObject;
+			tempEnv.transform.localScale = obj.scale;		
+		}  else if (obj.name.Contains("MagneticField")) {
+			tempEnv = Instantiate (mfield,obj.position, obj.rotation) as GameObject;
+			tempEnv.transform.localScale = obj.scale;	
+			if (obj.toggleState == 1) {
+				tempEnv.GetComponent<MagneticFieldScript>().Flip();
+			}
+		}  else if (obj.name.Contains("Measurer")) {
+			tempEnv = Instantiate (measurer,obj.position, obj.rotation) as GameObject;
+			tempEnv.transform.localScale = obj.scale;	
+			if (obj.toggleState == 1) {
+				tempEnv.GetComponent<MeasurerScript>().Flip();
+			}
+		}  else if (obj.name.Contains("SpawnPoint")) {
+			if (obj.toggleState == 1) {
+				currentPlayerSpawnPoint.transform.localPosition = obj.position;
+			} else {
+				tempEnv = Instantiate (spawnPoint,obj.position, obj.rotation) as GameObject;
+				tempEnv.transform.localScale = obj.scale;	
+			}
+		}  else if (obj.name.Contains("Teleporter")) {
+			tempEnv = Instantiate (teleporter,obj.position, obj.rotation) as GameObject;
+			tempEnv.transform.localScale = obj.scale;
+			if (obj.toggleState == 1) {
+				tempEnv.GetComponent<TeleporterScript>().Flip ();
+			}
+		}  
 	}
 	
 	// We create a wall in the space where the mouse is currently at
