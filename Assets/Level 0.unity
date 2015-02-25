@@ -2049,7 +2049,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1008890511}
-        m_MethodName: LoadScene
+        m_MethodName: SaveScene
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2809,6 +2809,10 @@ Prefab:
     - target: {fileID: 22438378, guid: dacbd93a22cbc8a4f93b9a84c9c6b78f, type: 2}
       propertyPath: m_AnchorMin.y
       value: .905566037
+      objectReference: {fileID: 0}
+    - target: {fileID: 11495100, guid: dacbd93a22cbc8a4f93b9a84c9c6b78f, type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SaveScene
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dacbd93a22cbc8a4f93b9a84c9c6b78f, type: 2}
