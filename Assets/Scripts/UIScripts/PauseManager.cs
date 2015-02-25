@@ -59,9 +59,9 @@ public class PauseManager : MonoBehaviour {
 		Text pausedText = GameObject.Find ("Paused Text").GetComponent<Text>();
 		
 		if(editorEnabled) {
-			pausedText.text = "PAUSED (Editor Mode)";
+			pausedText.text = "PAUSED: Editor Mode";
 		} else {
-			pausedText.text = "PAUSED (Play Mode)";
+			pausedText.text = "PAUSED: Play Mode";
 		}
 	}
 	
