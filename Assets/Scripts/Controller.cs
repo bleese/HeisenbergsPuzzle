@@ -13,6 +13,8 @@ public class Controller : MonoBehaviour {
 	//Usable scripts
 	public CameraFollow cameraScript;
 	
+	private bool comboBox = false;
+	
 	//public Transform wallCheck;
 	public float wallRadius = 0.1f;
 	public LayerMask theWall;
