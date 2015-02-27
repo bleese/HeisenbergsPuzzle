@@ -57,6 +57,11 @@ MonoBehaviour:
   rotationConstant: .707106769
   energyConsumption: 25
   wallZPosition: -1
+  black: {fileID: 21300000, guid: afa16fd9dfbd4e2408f7e8a8d00efba9, type: 3}
+  blue: {fileID: 21300000, guid: b0a8908e7897b6344bb3f660100d6376, type: 3}
+  green: {fileID: 21300000, guid: ba24e8918d8d04748af044ed3e0731ac, type: 3}
+  red: {fileID: 21300000, guid: 91bbbbc27eb4d0948b1d4ea7b80690b1, type: 3}
+  yellow: {fileID: 21300000, guid: 75b2e96e01dc82542a3dd8f27a5245ca, type: 3}
 --- !u!212 &21205146
 SpriteRenderer:
   m_ObjectHideFlags: 1

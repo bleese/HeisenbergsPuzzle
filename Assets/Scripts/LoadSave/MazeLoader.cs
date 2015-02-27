@@ -18,7 +18,6 @@ public class MazeLoader : MonoBehaviour {
 	
 	//Scans the scene for all environment objects in the scene and saves them to file 
 	public void SaveScene () {
-		Debug.Log ("Game is Saved");
 		InputField saveText = GameObject.Find ("NameSaveText").GetComponent<InputField>(); //Input Field with file name
 		List<ObjectSet> mazeSet = ScanScene(); //List of all the environment objects
 		SaveSceneToFile(saveText.text, mazeSet);	

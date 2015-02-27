@@ -6,10 +6,18 @@ public class WallScript : MonoBehaviour, IEnvironmentObject {
 	public bool selected = false;
 	public bool horizontal; // False is vertical direction, true is horizontal direction
     public float rotationConstant = 1 / Mathf.Sqrt (2);
-    public float energyConsumption = 25;
+    public float energyConsumption = 100;
     public float wallZPosition = -1f; // Should always be LOWEST as the wall should always be infront of other objects, other than the player
     private Vector3 offset;
-    
+	private bool antiMatter = false;
+	private SpriteRenderer spriteRenderer;
+	public Sprite black;
+	public Sprite blue;
+	public Sprite green;
+	public Sprite red;
+	public Sprite yellow;
+	
+	
     void OnMouseDown() {
 		RaycastHit2D hit = Physics2D.Raycast (Camera.main.ScreenToWorldPoint (Input.mousePosition), Vector2.zero);
 		offset = transform.localPosition - new Vector3(hit.point.x,hit.point.y,0);
@@ -35,20 +43,18 @@ public class WallScript : MonoBehaviour, IEnvironmentObject {
 		}
 	}
 	
-<<<<<<< HEAD
-	//void OnCollisionEnter2D(Collision2D col) {
-	//	if(col.gameObject.tag == "Player" && antiMatter) {
-	//		Energy health = col.gameObject.GetComponent<Energy>();
-	//		health.DecreaseEnergy (100f);
-	//	}
-	//}
+	void OnCollisionEnter2D(Collision2D col) {
+		if(col.gameObject.tag == "Player" && antiMatter) {
+			Energy health = col.gameObject.GetComponent<Energy>();
+			health.DecreaseEnergy (100f);
+		}
+	}
 	
-	
-	public void SetWallEnergy(float energy) {
-		this.energy = energy;
+	public void SetEnergy(float energy) {
+		energyConsumption = energy;
 		antiMatter = false;
 		if (energy > 50) {
-			spriteRenderer.sprite = black;
+			spriteRenderer.sprite = black;		
 		} else if (energy > 25) {
 			spriteRenderer.sprite = yellow;
 		} else if (energy > 10) {
@@ -61,11 +67,9 @@ public class WallScript : MonoBehaviour, IEnvironmentObject {
 		}
 	}
 	
-	public float getWallEnergy() {
-		return energy;
+	public float getEnergy() {
+		return energyConsumption;
 	}
-=======
->>>>>>> parent of 8fdd84e... Weird bug, attempting to add energy to walls
 	
 	// Use this for initialization
 	void Start () {
@@ -78,6 +82,10 @@ public class WallScript : MonoBehaviour, IEnvironmentObject {
 	   } else {
 	      horizontal = false;
 	   }
+		spriteRenderer = GetComponent<SpriteRenderer>();
+		if (spriteRenderer.sprite != null) {
+			spriteRenderer.sprite = black;
+		}
 	}
 	
 	public bool IsHorizontal() {
@@ -119,7 +127,17 @@ public class WallScript : MonoBehaviour, IEnvironmentObject {
 	}
 	
 	public void ChangeResizeDirection() {
-	   	return;
+		if (energyConsumption > 50) {
+			SetEnergy (50);	
+		} else if (energyConsumption > 25) {
+			SetEnergy (25);
+		} else if (energyConsumption> 10) {
+			SetEnergy (10);
+		} else if (energyConsumption > 0) {
+			SetEnergy (-1);
+		} else {
+			SetEnergy (100);
+		}
 	}
 	
 	public void ToggleEntity() {
