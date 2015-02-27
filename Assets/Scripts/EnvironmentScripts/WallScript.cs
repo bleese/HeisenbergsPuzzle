@@ -6,9 +6,16 @@ public class WallScript : MonoBehaviour, IEnvironmentObject {
 	public bool selected = false;
 	public bool horizontal; // False is vertical direction, true is horizontal direction
     public float rotationConstant = 1 / Mathf.Sqrt (2);
-    public float energyConsumption = 25;
     public float wallZPosition = -1f; // Should always be LOWEST as the wall should always be infront of other objects, other than the player
     private Vector3 offset;
+    public float energy = 100f;
+	private SpriteRenderer spriteRenderer; // Object to actually render the sprites
+    public Sprite black;
+    public Sprite red;
+    public Sprite green;
+    public Sprite blue;
+    public Sprite yellow;
+    private bool antiMatter = false;
     
     void OnMouseDown() {
 		RaycastHit2D hit = Physics2D.Raycast (Camera.main.ScreenToWorldPoint (Input.mousePosition), Vector2.zero);
@@ -35,6 +42,34 @@ public class WallScript : MonoBehaviour, IEnvironmentObject {
 		}
 	}
 	
+	void OnCollisionEnter2D(Collision2D col) {
+		if(col.gameObject.tag == "Player" && antiMatter) {
+			Energy health = col.gameObject.GetComponent<Energy>();
+			health.DecreaseEnergy (100f);
+		}
+	}
+	
+	
+	public void SetWallEnergy(float energy) {
+		this.energy = energy;
+		antiMatter = false;
+		if (energy > 50) {
+			spriteRenderer.sprite = black;
+		} else if (energy > 25) {
+			spriteRenderer.sprite = yellow;
+		} else if (energy > 10) {
+			spriteRenderer.sprite = green;
+		} else if (energy > 0) {
+			spriteRenderer.sprite = blue;
+		} else {
+			spriteRenderer.sprite = red;
+			antiMatter = true;
+		}
+	}
+	
+	public float getWallEnergy() {
+		return energy;
+	}
 	
 	// Use this for initialization
 	void Start () {
@@ -42,6 +77,10 @@ public class WallScript : MonoBehaviour, IEnvironmentObject {
 	   Vector3 tempPosition = transform.localPosition;
 	   tempPosition.z = wallZPosition;
 	   transform.localPosition = tempPosition;
+	   spriteRenderer = GetComponent<SpriteRenderer>();
+	   if (spriteRenderer.sprite != null) {
+	      spriteRenderer.sprite = black;
+	   }
 	   if (Mathf.Round(transform.rotation.eulerAngles.z) == 90) {
 	      horizontal = true;
 	   } else {
@@ -52,11 +91,7 @@ public class WallScript : MonoBehaviour, IEnvironmentObject {
 	public bool IsHorizontal() {
 		return horizontal;
 	}
-   
-   	public bool IsSelected() {
-   		return selected;
-   	}
-
+	
 	public void setSelected(bool selectedSetter) {
 	   selected = selectedSetter;
 	}
@@ -88,7 +123,17 @@ public class WallScript : MonoBehaviour, IEnvironmentObject {
 	}
 	
 	public void ChangeResizeDirection() {
-	   	return;
+		if (energy > 50) {
+			SetWallEnergy(50);
+		} else if (energy > 25) {
+			SetWallEnergy(25);
+		} else if (energy > 10) {
+			SetWallEnergy(10);
+		} else if (energy > 0) {
+			SetWallEnergy(-1);
+		} else {
+			SetWallEnergy(100);
+		}
 	}
 	
 	public void ToggleEntity() {
