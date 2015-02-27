@@ -42,8 +42,7 @@ public class CameraFollow : MonoBehaviour {
 	}
 	
 	void OnPlayerCreate(GameObject player) {
-		transform.position = new Vector3(player.transform.position.x,player.transform.position.y,-UniversalHelperScript.Instance.cameraZDistance);
-		
+		transform.position = player.transform.position;
 	}
 	
 	// Update is called once per frame

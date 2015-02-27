@@ -105,7 +105,7 @@ public class Tunneling : MonoBehaviour {
 			}
 			Energy energyScript = GetComponent<Energy>();
 			if(energyScript != null) {
-				energyScript.DecreaseEnergy(wallSc.energy);
+				energyScript.DecreaseEnergy(wallSc.energyConsumption);
 				
 			}
 			StartCoroutine("TunnelExec", target); //Transport the player smoothly

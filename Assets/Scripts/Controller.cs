@@ -25,6 +25,7 @@ public class Controller : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		EnableInput();
+		
 		Vector3 tempVector = transform.localPosition;
 		tempVector.z = playerZDistance;
 		transform.localPosition = tempVector;
@@ -51,9 +52,7 @@ public class Controller : MonoBehaviour {
     }
 
    void Move(Vector2 rawValue) {
-   	  //Debug.Log ("MOVING");
       rigidbody2D.velocity = rawValue*maxspeed;
-      Debug.Log (rigidbody2D.velocity);
       //rigidbody2D.AddForce (rawValue*maxspeed);
    }
    

@@ -63,7 +63,6 @@ public class InputSystem : MonoBehaviour {
 		if (OnInputPlayer != null) {
 			// Always check for velocity input, if no input is made then it'll just be a 0 vector
 			rawVal = new Vector2(Input.GetAxis ("Horizontal"), Input.GetAxis("Vertical"));
-			Debug.Log (rawVal);
 			OnInputPlayer(rawVal,ActionType.Move);	
 			if(Input.GetButtonDown ("Cancel")) {
 					OnInputPlayer(new Vector2(0,0),ActionType.Pause);
