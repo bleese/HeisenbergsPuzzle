@@ -42,12 +42,12 @@ public class WallScript : MonoBehaviour, IEnvironmentObject {
 		}
 	}
 	
-	void OnCollisionEnter2D(Collision2D col) {
-		if(col.gameObject.tag == "Player" && antiMatter) {
-			Energy health = col.gameObject.GetComponent<Energy>();
-			health.DecreaseEnergy (100f);
-		}
-	}
+	//void OnCollisionEnter2D(Collision2D col) {
+	//	if(col.gameObject.tag == "Player" && antiMatter) {
+	//		Energy health = col.gameObject.GetComponent<Energy>();
+	//		health.DecreaseEnergy (100f);
+	//	}
+	//}
 	
 	
 	public void SetWallEnergy(float energy) {

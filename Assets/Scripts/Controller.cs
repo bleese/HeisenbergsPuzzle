@@ -93,6 +93,10 @@ public class Controller : MonoBehaviour {
 		transform.localPosition = currentPosition;
 		
 		cameraScript.Target = transform.position;
+		
+		if (Input.GetAxis ("Horizontal") != 0) {
+			Debug.Log (Input.GetAxis ("Horizontal"));
+		}
 	}
 	
 	public void EnableInput() {

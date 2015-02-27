@@ -23,7 +23,6 @@ public class Energy : MonoBehaviour {
 		}
 		
 		updated = true;
-		
 	}
 	
 	public void IncreaseEnergy(float incEnergy) {
