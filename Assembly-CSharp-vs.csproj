@@ -56,6 +56,7 @@
      <Compile Include="Assets\Scripts\Energy.cs" />
      <Compile Include="Assets\Scripts\EnvironmentScripts\AntiMatterScript.cs" />
      <Compile Include="Assets\Scripts\EnvironmentScripts\ElectricFieldScript.cs" />
+     <Compile Include="Assets\Scripts\EnvironmentScripts\GateScript.cs" />
      <Compile Include="Assets\Scripts\EnvironmentScripts\MagneticFieldScript.cs" />
      <Compile Include="Assets\Scripts\EnvironmentScripts\MeasurerScript.cs" />
      <Compile Include="Assets\Scripts\EnvironmentScripts\SpawnScript.cs" />

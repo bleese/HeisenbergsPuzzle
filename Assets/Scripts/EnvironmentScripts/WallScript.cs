@@ -6,8 +6,7 @@ public class WallScript : MonoBehaviour, IEnvironmentObject {
 	public bool selected = false;
 	public bool horizontal; // False is vertical direction, true is horizontal direction
     public float rotationConstant = 1 / Mathf.Sqrt (2);
-    public float energyConsumption = 100;
-    public float wallZPosition = -1f; // Should always be LOWEST as the wall should always be infront of other objects, other than the player
+    public float energyConsumption = 100f;
     private Vector3 offset;
 	private bool antiMatter = false;
 	private SpriteRenderer spriteRenderer;
@@ -75,8 +74,9 @@ public class WallScript : MonoBehaviour, IEnvironmentObject {
 	void Start () {
 	   universalHelper = GameObject.FindObjectOfType(typeof(UniversalHelperScript)) as UniversalHelperScript; // Find appropriate universalHelper script to use
 	   Vector3 tempPosition = transform.localPosition;
-	   tempPosition.z = wallZPosition;
+	   tempPosition.z = UniversalHelperScript.Instance.wallZDistance;
 	   transform.localPosition = tempPosition;
+	   energyConsumption = 100f;
 	   if (Mathf.Round(transform.rotation.eulerAngles.z) == 90) {
 	      horizontal = true;
 	   } else {

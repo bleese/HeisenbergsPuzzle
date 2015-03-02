@@ -23,7 +23,8 @@ public enum ActionType {
 	ChooseSpawn = 17,
 	ChooseAltSpawn = 18,
 	Chain = 19,
-	ChainCan = 20
+	ChainCan = 20,
+	ChooseGate = 21
 }
 
 /*Scans for input from keyboard.
@@ -155,6 +156,12 @@ public class InputSystem : MonoBehaviour {
 				OnInputEditor(rawVal,ActionType.ChooseAltSpawn);
 			}
 			
+			// Creates gate for antimatter breaking
+			if (Input.GetKeyDown (KeyCode.Alpha8)) {
+				Debug.Log ("Alpha8");
+				OnInputEditor(rawVal,ActionType.ChooseGate);
+			}
+			
 			// Moves the player spawn point to mouse position
 			if (Input.GetKeyDown (KeyCode.Alpha0)) {
 				OnInputEditor(rawVal,ActionType.ChooseSpawn);
@@ -164,6 +171,7 @@ public class InputSystem : MonoBehaviour {
 			if (Input.GetButtonDown ("Flip")) {
 				OnInputEditor(rawVal, ActionType.Flip);		   
 			}
+			
 			
 			// Changing what AXIS we want to resize with
 			if (Input.GetKeyDown (KeyCode.Mouse2)) {

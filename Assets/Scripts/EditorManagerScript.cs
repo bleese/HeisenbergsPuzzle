@@ -40,6 +40,7 @@ public class EditorManagerScript : MonoBehaviour {
 	public GameObject antiMatter; // prefab for antiMatter
 	public GameObject teleporter; // prefab for Teleporter
 	public GameObject spawnPoint; // prefab spawnpoint
+	public GameObject gate; // Gate prefab
 	private GameObject currentPlayerSpawnPoint; 
 	GameObject selectedEnvironment = null;
 	IEnvironmentObject selectedScript = null;
@@ -94,6 +95,8 @@ public class EditorManagerScript : MonoBehaviour {
 			create = 6;		
 		} else if (action == ActionType.ChooseAltSpawn) {
 			create = 7;		
+		} else if (action == ActionType.ChooseGate) {
+			create = 8;
 		} else if (selectedEnvironment != null) {
 			if (action == ActionType.Destroy) {
 				Destroy ();
@@ -176,6 +179,8 @@ public class EditorManagerScript : MonoBehaviour {
 			return;
 		} else if (create == 7) {
 			tempEnv = Instantiate (spawnPoint,envPosition,Quaternion.identity) as GameObject;
+		} else if (create == 8) {
+			tempEnv = Instantiate (gate,envPosition,Quaternion.identity) as GameObject;
 		} else {
 		   return;
 		}
@@ -235,6 +240,8 @@ public class EditorManagerScript : MonoBehaviour {
 			selectedScript = selectedEnvironment.GetComponent<TeleporterScript>();
 		} else if (selectedEnvironment.tag == "Spawn") {
 			selectedScript = selectedEnvironment.GetComponent<SpawnScript>();	
+		} else if (selectedEnvironment.tag == "Gate") {
+			selectedScript = selectedEnvironment.GetComponent<GateScript>();
 		}
 		return selectedScript;
 	}
