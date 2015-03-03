@@ -12,6 +12,7 @@ public class Tunneling : MonoBehaviour {
 	private float shiftPosition = 1f;//Total amount the player is shifted from starting point to end point through tunneling
 	
 	private float reqTunnelingSize = 0.28f; //Transform scale the player needs to be inorder to tunnel
+
 	
 	// Use this for initialization
 	void Start () {
@@ -116,9 +117,15 @@ public class Tunneling : MonoBehaviour {
 	
 	//Transports the player smoothly by lerping to a target position
 	IEnumerator TunnelExec (Vector3 target) {
+
+		
 		Controller controller = GetComponent<Controller>();
 		controller.DisableInput();
-		while(Vector3.Distance(transform.position, target) > 0.17f) {
+		while(Vector3.Distance(transform.position, target) > 0.17f ) {
+			
+			if(Vector3.Distance(transform.position, target) > 1.8f) {
+				break;
+			}
 			
 			transform.position = Vector3.Lerp (transform.position, target, tunnelSpeed*Time.deltaTime);
 			
@@ -128,6 +135,7 @@ public class Tunneling : MonoBehaviour {
 			
 		}
 		controller.EnableInput ();
+
 		//print ("Finished");
 		
 	}

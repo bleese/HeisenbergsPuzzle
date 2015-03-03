@@ -22,12 +22,20 @@ public class MazeLoader : MonoBehaviour {
 		List<ObjectSet> mazeSet = ScanScene(); //List of all the environment objects
 		SaveSceneToFile(saveText.text, mazeSet);	
 		saveText.text = "";
+		RefreshComboBox();
+	}
+	
+	private void RefreshComboBox() {
+		Object[] mazeObjs = Resources.LoadAll("Mazes/");
+		foreach (Object maze in mazeObjs) {
+			comboBox.AddItems (maze.name);
+		}
 	}
 	
 	//Scans and retrieves all the objects in the scene with the environment tag
 	private List<ObjectSet> ScanScene() {
 		
-		GameObject[] envObjects = GameObjectsInScene();
+		List<GameObject> envObjects = GameObjectsInScene();
 		
 		List<ObjectSet> mazeSet = new List<ObjectSet>();
 		
@@ -76,41 +84,28 @@ public class MazeLoader : MonoBehaviour {
 	 	return mazeSet;	
 	} 
 	
-	/*Scans for all the GameObjects in the scene. Returns an array of all Game Objects that are tagged:
+	/*Scans for all the GameObjects in the scene. Returns a list of all Game Objects that are tagged:
 		-Environment
 		-Walls
 		-Spawn
 		-EField
 		-MField
 	*/
-	private GameObject[] GameObjectsInScene() {
+	private List<GameObject> GameObjectsInScene() {
 		
-		//Code is a bit of a mess at the moments, will improve
+		string[] tags = {"Walls", "Spawn", "EField", "MField", "AntiMatter"}; //Update tag array if you want to save extra objects
 		
-	 	//Get all the gameobject of the tag
-		GameObject[] envObjects1 = GameObject.FindGameObjectsWithTag("Walls");
-		GameObject[] envObjects2 = GameObject.FindGameObjectsWithTag("Spawn");
-		GameObject[] envObjects3 = GameObject.FindGameObjectsWithTag("EField");
-		GameObject[] envObjects4 = GameObject.FindGameObjectsWithTag("MField");
-		GameObject[] envObjects5 = GameObject.FindGameObjectsWithTag("AntiMatter");
+		List<GameObject> envObjects = new List<GameObject>();
 		
-		GameObject[] envObjects = new GameObject[envObjects1.Length + envObjects2.Length + envObjects3.Length + envObjects4.Length + envObjects5.Length ];
-		
-		//Concatenate all the game objects into one array
-		int tempIndex = 0;
-		envObjects1.CopyTo(envObjects,tempIndex);
-		tempIndex += envObjects1.Length;
-		envObjects2.CopyTo(envObjects,tempIndex);
-		tempIndex += envObjects2.Length;
-		envObjects3.CopyTo(envObjects,tempIndex);
-		tempIndex += envObjects3.Length;
-		envObjects4.CopyTo(envObjects,tempIndex);
-		tempIndex += envObjects4.Length;
-		envObjects5.CopyTo(envObjects,tempIndex);
-		tempIndex += envObjects5.Length;
-		//envObjects6.CopyTo(envObjects, tempIndex);
-		//tempIndex += envObjects6.Length;
-		
+		foreach(string tag in tags) { //Goes through each tag
+			
+			GameObject[] envObj = GameObject.FindGameObjectsWithTag(tag);  //Collects all objects of the tag
+			
+			foreach(GameObject obj in envObj) {
+				envObjects.Add(obj);	//Adds them to envObjects
+			}
+			
+		}
 		
 		return envObjects;
 	}
@@ -199,7 +194,7 @@ public class MazeLoader : MonoBehaviour {
 	
 	private void ClearScene() {
 		
-		GameObject[] envObjects;
+		List<GameObject> envObjects;
 		
 		envObjects = GameObjectsInScene();
 		
@@ -234,8 +229,8 @@ public class MazeLoader : MonoBehaviour {
 		
 		
 		foreach(ObjectSet tempObject in envObjects) {
-			EditorManagerScript.Instance.Create (tempObject);
-			//Debug.Log (tempObject.name + ": " + tempObject.position.ToString("F3") + " " + tempObject.rotation.ToString("F3") + " " + tempObject.scale.ToString("F3") );
+			//EditorManagerScript.Instance.Create (tempObject);
+			Debug.Log (tempObject.name + ": " + tempObject.position.ToString("F3") + " " + tempObject.rotation.ToString("F3") + " " + tempObject.scale.ToString("F3") );
 		}
 		
 		

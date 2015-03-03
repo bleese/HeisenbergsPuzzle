@@ -1,15 +1,10 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\EnvironmentScripts\WallScript.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/LoadSave/MazeLoader.cs">
     <Files>
-      <File FileName="Assets\Scripts\EnvironmentScripts\WallScript.cs" Line="17" Column="23" />
-      <File FileName="Assets\Scripts\EnvironmentScripts\MagneticFieldScript.cs" Line="109" Column="1" />
-      <File FileName="Assets\Scripts\EnvironmentScripts\AntiMatterScript.cs" Line="90" Column="1" />
-      <File FileName="Assets\Scripts\EnvironmentScripts\TeleporterScript.cs" Line="103" Column="1" />
-      <File FileName="Assets\Scripts\InputSystem.cs" Line="188" Column="1" />
-      <File FileName="Assets\Scripts\EnvironmentScripts\SpawnScript.cs" Line="87" Column="1" />
-      <File FileName="Assets\Scripts\CameraFollow.cs" Line="69" Column="1" />
-      <File FileName="Assets\Scripts\Controller.cs" Line="109" Column="1" />
+      <File FileName="Assets/Scripts/EditorManagerScript.cs" Line="183" Column="1" />
+      <File FileName="Assets/Scripts/LoadSave/MazeLoader.cs" Line="232" Column="4" />
+      <File FileName="Assets/Scripts/UIScripts/PauseManager.cs" Line="34" Column="4" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

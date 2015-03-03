@@ -22,6 +22,7 @@ public class Controller : MonoBehaviour {
 	// useful variables
 	private Vector3 tempVector;
 
+
 	// Use this for initialization
 	void Start () {
 		EnableInput();
@@ -31,6 +32,7 @@ public class Controller : MonoBehaviour {
 		transform.localPosition = tempVector;
 		UniversalHelperScript.Instance.InformPlayerCreation (gameObject);
 		cameraScript = GameObject.Find ("Main Camera").GetComponent<CameraFollow>();
+
 	}
 
 	// Forces the a particular size to the player
@@ -45,7 +47,7 @@ public class Controller : MonoBehaviour {
 
 	void OnInputEvent(Vector2 rawValue, ActionType action) {
     	if (action == ActionType.Move) {
-              Move(rawValue);
+        	Move(rawValue);
        	} else if (action == ActionType.Uncertainty) {
         	  ApplyUncertainty(rawValue);
        	}
@@ -91,7 +93,10 @@ public class Controller : MonoBehaviour {
 		}
 		transform.localPosition = currentPosition;
 		
-		cameraScript.Target = transform.position;
+		//cameraScript.Target = transform.position;
+		
+		
+
 		
 		if (Input.GetAxis ("Horizontal") != 0) {
 			Debug.Log (Input.GetAxis ("Horizontal"));
