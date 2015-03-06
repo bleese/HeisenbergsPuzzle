@@ -25,11 +25,11 @@ public class SpawnScript : MonoBehaviour, IEnvironmentObject {
 		}
 		
 		
-		Debug.Log (GameObject.FindGameObjectWithTag ("Player"));
+		//Debug.Log (GameObject.FindGameObjectWithTag ("Player"));
 		//If the spawn point spawns a player, and if a player object hasn't been spawned yet, instantiate the player
 		//This condition will not be met when a player creates a new player spawn point in the editor
 		if ( playerSpawn && (GameObject.FindGameObjectWithTag ("Player") == null) ) { 
-			Debug.Log ("Hello World");
+			//Debug.Log ("Hello World");
 			Instantiate (spawningObject,this.transform.position, Quaternion.identity);
 		} 
 		
@@ -80,6 +80,12 @@ public class SpawnScript : MonoBehaviour, IEnvironmentObject {
 	// Sets whether or not the field should have a force
 	public void ToggleEntity () {
 		this.collider2D.enabled = !this.collider2D.enabled;
+	}
+	
+	public void Respawn () {
+		
+		Instantiate (spawningObject,this.transform.position, Quaternion.identity);
+		
 	}
 	
 	

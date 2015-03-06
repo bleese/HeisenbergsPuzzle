@@ -61,9 +61,11 @@
      <Compile Include="Assets\Scripts\EnvironmentScripts\MeasurerScript.cs" />
      <Compile Include="Assets\Scripts\EnvironmentScripts\SpawnScript.cs" />
      <Compile Include="Assets\Scripts\EnvironmentScripts\TeleporterScript.cs" />
+     <Compile Include="Assets\Scripts\EnvironmentScripts\TriggerPoint.cs" />
      <Compile Include="Assets\Scripts\EnvironmentScripts\WallScript.cs" />
      <Compile Include="Assets\Scripts\IEnvironmentObject.cs" />
      <Compile Include="Assets\Scripts\InputSystem.cs" />
+     <Compile Include="Assets\Scripts\LevelManager.cs" />
      <Compile Include="Assets\Scripts\LoadSave\MazeLoader.cs" />
      <Compile Include="Assets\Scripts\Misc\GizmoBound.cs" />
      <Compile Include="Assets\Scripts\Tunneling.cs" />
@@ -71,12 +73,10 @@
      <Compile Include="Assets\Scripts\UIScripts\PauseManager.cs" />
      <Compile Include="Assets\Scripts\UIScripts\SimpleImageToggle.cs" />
      <Compile Include="Assets\Scripts\UniversalHelperScript.cs" />
+     <None Include="Assets\Resources\Mazes\TriggerTest.txt" />
      <None Include="Assets\Resources\Mazes\Test6.txt" />
-     <None Include="Assets\Resources\Mazes\TestLevel0.txt" />
      <None Include="Assets\Resources\Mazes\Test5.txt" />
-     <None Include="Assets\Resources\Mazes\Test3.txt" />
      <None Include="Assets\Resources\Mazes\Test8.txt" />
-     <None Include="Assets\Resources\Mazes\TestLevel1.txt" />
  <Reference Include="UnityEngine.UI">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/GUISystem/4.6.1/UnityEngine.UI.dll</HintPath>
  </Reference>

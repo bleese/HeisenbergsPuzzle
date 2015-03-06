@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System;
 
 // NOTE: When adding a new IEnvironmentObject to the Editor manager, simply follow these steps
 //   1. Add the new environment Objects prefab to the class variables
@@ -8,6 +9,30 @@ using System.Collections.Generic;
 //   3. Add a case in the OnInputEvent for your new ActionType, set a new value for the create variable
 //   4. Add a case in the "Create function" to instantiate your new object
 //   5. Add a case in the "getValidComponent" function for your new object, based on tag
+
+/*Trigger Points are abstracted to provide triggers for more than a single event whenever player move over them
+To save the set of events a trigger point contains, when saving it in the toggleState field, enum Flags are used 
+Bitwise calculations can be used to determine what flags were set
+e.g.
+If a trigger triggers end of level, then its flag value is -> 0001
+If a trigger triggers Generic1 & Generic2, then its flag value is  0010 | 0100 => 0110
+	-To test if the enum has these flag values set
+		
+		TriggerFlags trigger = TriggerFlags.Generic1 | TriggerFlags.Generic2; //0110
+		if((trigger & TriggerFlags.Generic1 & TriggerFlags.Generic2) != 0) {
+			blah...
+		}
+		// Above if statement:  if(0110 & 0010 & 0100) => Bitwise calculation returns 0110 
+*/
+[Flags]
+public enum TriggerFlags {
+	
+	LevelEnd = 1,
+	Generic1 = 2,
+	Generic2 = 4,
+	Generic3 = 8
+	
+}
 
 //Basic Environment Object Properties 
 // NOTE TEMPORARY CLASS
@@ -41,6 +66,7 @@ public class EditorManagerScript : MonoBehaviour {
 	public GameObject teleporter; // prefab for Teleporter
 	public GameObject spawnPoint; // prefab spawnpoint
 	public GameObject gate; // Gate prefab
+	public GameObject triggerPoint; //trigger point prefab
 	private GameObject currentPlayerSpawnPoint; 
 	GameObject selectedEnvironment = null;
 	IEnvironmentObject selectedScript = null;
@@ -72,6 +98,7 @@ public class EditorManagerScript : MonoBehaviour {
 			currentPlayerSpawnPoint = newSpawnPoint;
 		}
 	}
+	 
 	
 	// Listens for appropriate Input
 	void OnInputEvent(Vector2 rawValue, ActionType action) {
@@ -97,6 +124,8 @@ public class EditorManagerScript : MonoBehaviour {
 			create = 7;		
 		} else if (action == ActionType.ChooseGate) {
 			create = 8;
+		} else if (action == ActionType.ChooseTriggerPoint) {
+			create = 9;
 		} else if (selectedEnvironment != null) {
 			if (action == ActionType.Destroy) {
 				Destroy ();
@@ -154,6 +183,13 @@ public class EditorManagerScript : MonoBehaviour {
 			if (obj.toggleState == 1) {
 				tempEnv.GetComponent<TeleporterScript>().Flip ();
 			}
+		} else if (obj.name.Contains("TriggerPoint")) {
+			tempEnv = Instantiate (triggerPoint,obj.position, obj.rotation) as GameObject;
+		  	tempEnv.transform.localScale = obj.scale;
+		  	TriggerFlags flags = (TriggerFlags)Mathf.CeilToInt(obj.toggleState);
+			if((flags & TriggerFlags.LevelEnd) != 0) {
+				tempEnv.GetComponent<TriggerPoint>().SetLevelEnd();
+		  	}
 		}  
 	}
 	
@@ -181,7 +217,9 @@ public class EditorManagerScript : MonoBehaviour {
 			tempEnv = Instantiate (spawnPoint,envPosition,Quaternion.identity) as GameObject;
 		} else if (create == 8) {
 			tempEnv = Instantiate (gate,envPosition,Quaternion.identity) as GameObject;
-		} else {
+		} else if (create == 9) {
+			tempEnv = Instantiate (triggerPoint,envPosition, Quaternion.identity) as GameObject;
+		}  else {
 		   return;
 		}
 		environments.Add (tempEnv);	
@@ -242,6 +280,8 @@ public class EditorManagerScript : MonoBehaviour {
 			selectedScript = selectedEnvironment.GetComponent<SpawnScript>();	
 		} else if (selectedEnvironment.tag == "Gate") {
 			selectedScript = selectedEnvironment.GetComponent<GateScript>();
+		} else if (selectedEnvironment.tag == "Trigger") {
+			selectedScript = selectedEnvironment.GetComponent<TriggerPoint>();
 		}
 		return selectedScript;
 	}
@@ -272,6 +312,10 @@ public class EditorManagerScript : MonoBehaviour {
 			tempScript = spawn.GetComponent<SpawnScript>();
 			tempScript.SetEditor (edit);
 		}
+	}
+	
+	public GameObject GetCurrentSpawnPoint() {
+		return currentPlayerSpawnPoint;
 	}
 	
 	private static EditorManagerScript instance; //Instance of InputSystem gameobject. InputSystem acts as a singleton class, being independent of other game objects 

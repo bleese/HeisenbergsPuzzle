@@ -99,7 +99,7 @@ public class Controller : MonoBehaviour {
 
 		
 		if (Input.GetAxis ("Horizontal") != 0) {
-			Debug.Log (Input.GetAxis ("Horizontal"));
+			//Debug.Log (Input.GetAxis ("Horizontal"));
 		}
 	}
 	
@@ -109,5 +109,10 @@ public class Controller : MonoBehaviour {
 	
 	public void DisableInput() {
 		InputSystem.Instance.OnInputPlayer -= OnInputEvent;
+	}
+	
+	public void DestroyMe() {
+		DisableInput();
+		Destroy(this.gameObject);
 	}
 }

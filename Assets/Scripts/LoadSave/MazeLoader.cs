@@ -10,6 +10,25 @@ public class MazeLoader : MonoBehaviour {
 	
 	private ComboBox comboBox;
 	
+	
+	private static MazeLoader instance; //Instance of LevelManager gameobject. LevelManager acts as a singleton class, being independent of other game objects 
+	
+	private MazeLoader() {}
+	
+	public static MazeLoader Instance
+	{
+		
+		get 
+		{
+			if(instance == null) {
+				instance = GameObject.FindObjectOfType(typeof(MazeLoader)) as MazeLoader; //Instantiate class if instance == null
+				
+			}
+			return instance;
+			
+		}
+	}
+	
 	void Start() {
 	
 		comboBox = GameObject.Find ("ComboBox").GetComponent<ComboBox>();
@@ -66,6 +85,15 @@ public class MazeLoader : MonoBehaviour {
 	 		// Whether or not the spawn is a player spawn or not
 	 		} else if (env.tag == "Spawn" && env.GetComponent<SpawnScript>().playerSpawn) {
 	 			state = 1f;
+	 		} else if (env.tag == "Trigger") {
+	 			TriggerPoint triggerScript = env.GetComponent<TriggerPoint>();
+	 			TriggerFlags stateFlag = 0;
+	 			if(triggerScript.levelEnd) {
+	 				stateFlag |= TriggerFlags.LevelEnd;
+	 			}
+	 			
+	 			state = (float)((int)stateFlag);
+	 			
 	 		}
 	 		// Determining the state of the object, in terms of rotation or what-not
 	 		
@@ -93,11 +121,31 @@ public class MazeLoader : MonoBehaviour {
 	*/
 	private List<GameObject> GameObjectsInScene() {
 		
-		string[] tags = {"Walls", "Spawn", "EField", "MField", "AntiMatter"}; //Update tag array if you want to save extra objects
+		string[] tags = {"Walls", "Spawn", "EField", "MField", "AntiMatter", "Trigger"}; //Update tag array if you want to save extra objects
 		
 		List<GameObject> envObjects = new List<GameObject>();
 		
 		foreach(string tag in tags) { //Goes through each tag
+			
+			GameObject[] envObj = GameObject.FindGameObjectsWithTag(tag);  //Collects all objects of the tag
+			
+			foreach(GameObject obj in envObj) {
+				envObjects.Add(obj);	//Adds them to envObjects
+			}
+			
+		}
+		
+		return envObjects;
+	}
+	
+	/*Scans for all the GameObjects in the scene specified in the specificTags parameter
+	*/
+	private List<GameObject> GameObjectsInScene(string[] specificTags) {
+		
+		
+		List<GameObject> envObjects = new List<GameObject>();
+		
+		foreach(string tag in specificTags) { //Goes through each tag
 			
 			GameObject[] envObj = GameObject.FindGameObjectsWithTag(tag);  //Collects all objects of the tag
 			
@@ -181,22 +229,34 @@ public class MazeLoader : MonoBehaviour {
 		
 	}
 	
-
+	//Loads the Scene specified by the combo box in the Pause screen combo box
 	public void LoadScene() {
 		
-		//ClearScene ();
 		string mazeName = RetrieveMaze();
 		List<ObjectSet> envObjects = ParseScene(mazeName);
+		BuildScene(envObjects);
 		
 					
 	}
 	
+	//Loads the Scene specified by parameter 'mazeName'
+	public void LoadScene(string mazeName) {
+		
+		List<ObjectSet> envObjects = ParseScene(mazeName);
+		BuildScene(envObjects);
+		
+		
+	}
 	
+	//Clears environment objects from the scene
+	//Doesn't remove spawn points
 	private void ClearScene() {
 		
 		List<GameObject> envObjects;
 		
-		envObjects = GameObjectsInScene();
+		string[] specificTags = {"Walls", "EField", "MField", "AntiMatter", "Trigger"}; //Objects the ClearScene function uses
+		
+		envObjects = GameObjectsInScene(specificTags);
 		
 		foreach(GameObject env in envObjects) {
 			Destroy(env);	
@@ -228,15 +288,34 @@ public class MazeLoader : MonoBehaviour {
 		}
 		
 		
-		foreach(ObjectSet tempObject in envObjects) {
-			//EditorManagerScript.Instance.Create (tempObject);
-			Debug.Log (tempObject.name + ": " + tempObject.position.ToString("F3") + " " + tempObject.rotation.ToString("F3") + " " + tempObject.scale.ToString("F3") );
+		return envObjects;
+	
+	}
+	
+	/*
+	-Clears the current scene -> Deletes all environment objects
+	-Instantiates all environment objects specified in envObjects parameter
+	*/
+	private void BuildScene(List<ObjectSet> envObjects) {
+		
+		ClearScene(); // Remove all environment objects
+		
+		//Find the player object and destroy it
+		GameObject player = GameObject.FindGameObjectWithTag("Player");
+		if(player != null) {
+			player.GetComponent<Controller>().DestroyMe();
 		}
 		
 		
+		foreach(ObjectSet tempObject in envObjects) {
+			EditorManagerScript.Instance.Create (tempObject);
+			//Debug.Log (tempObject.name + ": " + tempObject.position.ToString("F3") + " " + tempObject.rotation.ToString("F3") + " " + tempObject.scale.ToString("F3") );
+		}
 		
-		return envObjects;
-	
+		//Respawn the player at the new spawn point
+		EditorManagerScript.Instance.GetCurrentSpawnPoint().GetComponent<SpawnScript>().Respawn();
+		
+		
 	}
 	
 

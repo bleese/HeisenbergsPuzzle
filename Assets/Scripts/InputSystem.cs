@@ -24,7 +24,8 @@ public enum ActionType {
 	ChooseAltSpawn = 18,
 	Chain = 19,
 	ChainCan = 20,
-	ChooseGate = 21
+	ChooseGate = 21,
+	ChooseTriggerPoint = 22
 }
 
 /*Scans for input from keyboard.
@@ -160,6 +161,11 @@ public class InputSystem : MonoBehaviour {
 			if (Input.GetKeyDown (KeyCode.Alpha8)) {
 				Debug.Log ("Alpha8");
 				OnInputEditor(rawVal,ActionType.ChooseGate);
+			}
+			
+			//Selecting to create a trigger point
+			if (Input.GetKeyDown (KeyCode.Alpha9)) {
+				OnInputEditor(rawVal, ActionType.ChooseTriggerPoint);
 			}
 			
 			// Moves the player spawn point to mouse position
