@@ -49,7 +49,7 @@ public class PauseManager : MonoBehaviour {
 	}
 	
 	public void Pause() {
-				
+		
 		canvas.enabled = !canvas.enabled;
 		Time.timeScale = Time.timeScale == 0 ? 1 : 0;
 		

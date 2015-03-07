@@ -744,6 +744,10 @@ Prefab:
       propertyPath: gate
       value: 
       objectReference: {fileID: 136706, guid: 5a0b1753b04a11640ab0389d3ab68b17, type: 2}
+    - target: {fileID: 11446750, guid: 492d110a1b970ed47a5ac35e32fbd4df, type: 2}
+      propertyPath: triggerPoint
+      value: 
+      objectReference: {fileID: 198198, guid: 30fe9433c3b2f4b3b9a5a0cdc99c7712, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 492d110a1b970ed47a5ac35e32fbd4df, type: 2}
   m_RootGameObject: {fileID: 1008890508}
@@ -1427,6 +1431,22 @@ Prefab:
       propertyPath: m_AnchorMin.y
       value: .874000013
       objectReference: {fileID: 0}
+    - target: {fileID: 11495100, guid: dacbd93a22cbc8a4f93b9a84c9c6b78f, type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1008890511}
+    - target: {fileID: 11495100, guid: dacbd93a22cbc8a4f93b9a84c9c6b78f, type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SaveScene
+      objectReference: {fileID: 0}
+    - target: {fileID: 11438370, guid: dacbd93a22cbc8a4f93b9a84c9c6b78f, type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1008890511}
+    - target: {fileID: 11438370, guid: dacbd93a22cbc8a4f93b9a84c9c6b78f, type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: LoadScene
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dacbd93a22cbc8a4f93b9a84c9c6b78f, type: 2}
   m_RootGameObject: {fileID: 406339844}
@@ -1689,6 +1709,7 @@ MonoBehaviour:
   teleporter: {fileID: 164646, guid: 6eca2487d2b1a7e418c8651ccf243d76, type: 2}
   spawnPoint: {fileID: 107820, guid: 327d5c672631a4a0dbb04ce275db7469, type: 2}
   gate: {fileID: 136706, guid: 5a0b1753b04a11640ab0389d3ab68b17, type: 2}
+  triggerPoint: {fileID: 198198, guid: 30fe9433c3b2f4b3b9a5a0cdc99c7712, type: 2}
 --- !u!114 &1008890511
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1778,8 +1799,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: LoadScene
+      - m_Target: {fileID: 1008890511}
+        m_MethodName: SaveScene
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1943,7 +1964,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1008890511}
         m_MethodName: LoadScene
         m_Mode: 1
         m_Arguments:
@@ -2418,6 +2439,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   smoothing: 4
+  dampTime: .150000006
 --- !u!1 &1702099780
 GameObject:
   m_ObjectHideFlags: 0

@@ -79,6 +79,7 @@ public class MagneticFieldScript : MonoBehaviour, IEnvironmentObject {
 	public void Flip() {
 		// Change the direction of the force and the appropriate sprite
 		direction = !direction;
+		Debug.Log (spriteRenderer);
 		if (spriteRenderer.sprite == intoTheScreen) {
 			spriteRenderer.sprite = outOfTheScreen;
 		} else {
@@ -101,10 +102,12 @@ public class MagneticFieldScript : MonoBehaviour, IEnvironmentObject {
 	
 	// Sets whether or not the field should have a force
 	public void ToggleEntity () {
-		this.collider2D.enabled = !this.collider2D.enabled;
+		force = !force;
 	}
 	// Use this for initialization
-	void Start () {
+	void Awake () {
+		intoTheScreen = SpriteKeeperScript.Instance.GetMFieldInto();
+		outOfTheScreen = SpriteKeeperScript.Instance.GetMFieldOuto();
 		universalHelper = GameObject.FindObjectOfType(typeof(UniversalHelperScript)) as UniversalHelperScript; // Find appropriate universalHelper script to use
 		spriteRenderer = GetComponent<SpriteRenderer>();
 		if (spriteRenderer.sprite != null) {

@@ -69,22 +69,28 @@ public class MazeLoader : MonoBehaviour {
 				}
 			}
 	 		
-	 		float state = 0f;
+	 		int state = 0;
 	 		// For antimatter state determines if it is antimatter or matter. 0 = antimatter, 1 = matter
 			if (env.tag == "AntiMatter" && env.GetComponent<AntiMatterScript>().isMatter) {
-	 			state = 1f;
+	 			state = 1;
 	 		// For Magnetic field state refers to whether or not the magnetic field is into our out of page. 0 = into, 1 = out of
 	 		} else if (env.tag == "MField" && env.GetComponent<MagneticFieldScript>().direction) {
-	 			state = 1f;
+	 			state = 1;
 	 		// Whether or not the teleporter is activated, 0 = no, 1 = yes
 	 		} else if (env.tag == "Teleporter" && env.GetComponent<TeleporterScript>().enabled) {
-	 			state = 1f;
+	 			state = 1;
 	 		// Whether or not the Measurer is measuring momentem or position. 0 for position, 1 for momentum
 	 		} else if (env.tag == "Measurer" && env.GetComponent<MeasurerScript>().pORxMeasure) {
-	 			state = 1f;
+	 			state = 1;
 	 		// Whether or not the spawn is a player spawn or not
 	 		} else if (env.tag == "Spawn" && env.GetComponent<SpawnScript>().playerSpawn) {
-	 			state = 1f;
+	 			state = 1;
+	 		} else if (env.tag == "Wall") {
+				// The state is twice the value of the energy in the wall. If the wall is even then the wall is verticle, otherwise it is horizontal
+				state = 2*(int)env.GetComponent<WallScript>().energyConsumption;
+				if (env.GetComponent<WallScript>().IsHorizontal()) {
+					state++;
+			    }
 	 		} else if (env.tag == "Trigger") {
 	 			TriggerPoint triggerScript = env.GetComponent<TriggerPoint>();
 	 			TriggerFlags stateFlag = 0;
@@ -92,8 +98,10 @@ public class MazeLoader : MonoBehaviour {
 	 				stateFlag |= TriggerFlags.LevelEnd;
 	 			}
 	 			
-	 			state = (float)((int)stateFlag);
+	 			state = ((int)stateFlag);
 	 			
+	 		} else if (env.tag == "Gate" && !env.GetComponent<GateScript>().isMatter) {
+	 		   state = 1;
 	 		}
 	 		// Determining the state of the object, in terms of rotation or what-not
 	 		
@@ -121,7 +129,7 @@ public class MazeLoader : MonoBehaviour {
 	*/
 	private List<GameObject> GameObjectsInScene() {
 		
-		string[] tags = {"Walls", "Spawn", "EField", "MField", "AntiMatter", "Trigger"}; //Update tag array if you want to save extra objects
+		string[] tags = {"Walls", "Spawn", "EField", "MField", "AntiMatter", "Trigger", "Measurer", "Teleporter", "Gate"}; //Update tag array if you want to save extra objects
 		
 		List<GameObject> envObjects = new List<GameObject>();
 		
@@ -205,7 +213,7 @@ public class MazeLoader : MonoBehaviour {
 			mazeJSON[objectName]["Scale"]["y"].AsDouble = mazeObj.scale.y;
 			mazeJSON[objectName]["Scale"]["z"].AsDouble = mazeObj.scale.z;
 			
-			mazeJSON[objectName]["State"].AsFloat = mazeObj.toggleState;
+			mazeJSON[objectName]["State"].AsInt = mazeObj.toggleState;
 			
 			mazeJSON[objectName]["Name"] = mazeObj.name;
 			
@@ -254,7 +262,7 @@ public class MazeLoader : MonoBehaviour {
 		
 		List<GameObject> envObjects;
 		
-		string[] specificTags = {"Walls", "EField", "MField", "AntiMatter", "Trigger"}; //Objects the ClearScene function uses
+		string[] specificTags = {"Walls", "EField", "MField", "AntiMatter", "Trigger","Measurer", "Teleporter", "Gate"}; //Objects the ClearScene function uses
 		
 		envObjects = GameObjectsInScene(specificTags);
 		
@@ -281,7 +289,7 @@ public class MazeLoader : MonoBehaviour {
 			Vector3 tempPosition = new Vector3(mazeJSON[i]["Position"]["x"].AsFloat,mazeJSON[i]["Position"]["y"].AsFloat, mazeJSON[i]["Position"]["z"].AsFloat);
 			Quaternion tempRotation = new Quaternion(mazeJSON[i]["Rotation"]["x"].AsFloat,mazeJSON[i]["Rotation"]["y"].AsFloat, mazeJSON[i]["Rotation"]["z"].AsFloat, 0);
 			Vector3 tempScale = new Vector3(mazeJSON[i]["Scale"]["x"].AsFloat,mazeJSON[i]["Scale"]["y"].AsFloat, mazeJSON[i]["Scale"]["z"].AsFloat);
-			float state = mazeJSON[i]["State"].AsFloat;
+			int state = mazeJSON[i]["State"].AsInt;
 			ObjectSet tempObject = new ObjectSet(tempPosition,tempRotation,tempScale,tempName, state);
 			envObjects.Add(tempObject);
 			

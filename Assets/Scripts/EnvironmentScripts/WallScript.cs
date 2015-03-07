@@ -66,10 +66,6 @@ public class WallScript : MonoBehaviour, IEnvironmentObject {
 		}
 	}
 	
-	public float getEnergy() {
-		return energyConsumption;
-	}
-	
 	// Use this for initialization
 	void Start () {
 	   universalHelper = GameObject.FindObjectOfType(typeof(UniversalHelperScript)) as UniversalHelperScript; // Find appropriate universalHelper script to use

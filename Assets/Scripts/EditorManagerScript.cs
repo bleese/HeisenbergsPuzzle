@@ -42,10 +42,10 @@ public class ObjectSet {
 	public Quaternion rotation; //transform.rotation
 	public Vector3 scale; //transfrom.scale
 	public string name; //name of game object
-	public float toggleState; // Will be different for different objects, but is a simple number that refers to the state of the object
+	public int toggleState; // Will be different for different objects, but is a simple number that refers to the state of the object
 	
 	//Initialise Objects properties 
-	public ObjectSet (Vector3 pos, Quaternion rot, Vector3 sca, string obName, float toggleState) {
+	public ObjectSet (Vector3 pos, Quaternion rot, Vector3 sca, string obName, int toggleState) {
 		
 		position = pos;
 		rotation = rot;
@@ -128,7 +128,7 @@ public class EditorManagerScript : MonoBehaviour {
 			create = 9;
 		} else if (selectedEnvironment != null) {
 			if (action == ActionType.Destroy) {
-				Destroy ();
+				DestroyEnv ();
 			} else if (action == ActionType.Snap) {
 				Snap ();
 			} else if (action == ActionType.Flip) {
@@ -145,10 +145,15 @@ public class EditorManagerScript : MonoBehaviour {
 	
 	// An overloaded create function for level loading, if we already know where the object will be
 	public void Create(ObjectSet obj) {
-		GameObject tempEnv;
+		GameObject tempEnv = null;
 		if (obj.name.Contains ("Barrier")) {
 			tempEnv = Instantiate (wall,obj.position, obj.rotation) as GameObject;
 			tempEnv.transform.localScale = obj.scale;
+			if (obj.toggleState % 2 == 1) {
+			   obj.toggleState--;
+			   tempEnv.GetComponent<WallScript>().Flip ();
+			}
+			//tempEnv.GetComponent<WallScript>().SetEnergy (obj.toggleState / 2);
 		} else if (obj.name.Contains("AntiMatter")) {
 			tempEnv = Instantiate (antiMatter,obj.position, obj.rotation) as GameObject;
 			tempEnv.transform.localScale = obj.scale;	
@@ -168,6 +173,7 @@ public class EditorManagerScript : MonoBehaviour {
 			tempEnv = Instantiate (measurer,obj.position, obj.rotation) as GameObject;
 			tempEnv.transform.localScale = obj.scale;	
 			if (obj.toggleState == 1) {
+			    Debug.Log (tempEnv);
 				tempEnv.GetComponent<MeasurerScript>().Flip();
 			}
 		}  else if (obj.name.Contains("SpawnPoint")) {
@@ -190,6 +196,12 @@ public class EditorManagerScript : MonoBehaviour {
 			if((flags & TriggerFlags.LevelEnd) != 0) {
 				tempEnv.GetComponent<TriggerPoint>().SetLevelEnd();
 		  	}
+		}  else if (obj.name.Contains("Gate")) {
+			tempEnv = Instantiate (gate,obj.position, obj.rotation) as GameObject;
+			tempEnv.transform.localScale = obj.scale;
+			if (obj.toggleState == 1) {
+				tempEnv.GetComponent<GateScript>().Flip ();
+			}
 		}  
 	}
 	
@@ -227,11 +239,20 @@ public class EditorManagerScript : MonoBehaviour {
 		selectedScript = getValidComponent (tempEnv);	
 	}
 	
-	private void Destroy() {
+	public void DestroyEnv() {
 		environments.Remove (selectedEnvironment);
 		Destroy (selectedEnvironment);
 		selectedScript = null;
 		selectedEnvironment = null;
+	}
+	
+	public void DestroyEnv(GameObject toBeDestroyed) {
+	   	if (toBeDestroyed == selectedEnvironment) { // This will hold true because we're interested in the REFERENCE of the gameobject, not the object itself
+	   		selectedEnvironment = null;
+	   		selectedScript = null;
+	   	}
+	   	environments.Remove (toBeDestroyed);
+	   	Destroy (toBeDestroyed);
 	}
 	
 	private void Flip() {

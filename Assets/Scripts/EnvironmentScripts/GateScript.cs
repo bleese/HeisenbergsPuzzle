@@ -6,10 +6,9 @@ public class GateScript : MonoBehaviour, IEnvironmentObject {
 	// Magnetic field is a bit more complicate than an electric field. There are only two directions, into the screen and out of the screen
 	// Into is considered True; out of is considered False
 	// Based on the Right Hand Rule (Remember first year physics) the magnetic field will apply a force normal to the direction of velocity
-	// This will mean, unlike the electric field, the magnetic field will curve the electron with a force proportional to the speed of the electron
-	float power = 40;
+	// This will mean, unlike the electric field, the magnetic field will curve the electron with a force proportional to the speed of the electro
 	private bool resizeDirection = false; // False = x direction, True = y direction
-	private bool isMatter = true;
+	public bool isMatter = true;
 	private UniversalHelperScript universalHelper;
 	private Vector3 offset;
 	
@@ -38,8 +37,11 @@ public class GateScript : MonoBehaviour, IEnvironmentObject {
 	
 	void OnCollisionEnter2D(Collision2D col) {
 		if(col.gameObject.tag == "AntiMatter") {
-			Destroy (col.gameObject);
-			Destroy (this.gameObject);
+		    AntiMatterScript antiScript = col.gameObject.GetComponent<AntiMatterScript>();
+		    if (antiScript.isMatter != this.isMatter) {
+			   EditorManagerScript.Instance.DestroyEnv (col.gameObject);
+			   EditorManagerScript.Instance.DestroyEnv (this.gameObject);
+			}
 		}
 	}
 	
