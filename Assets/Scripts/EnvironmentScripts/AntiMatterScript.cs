@@ -39,8 +39,10 @@ public class AntiMatterScript : MonoBehaviour, IEnvironmentObject {
 	}
 	
 	// Use this for initialization
-	void Start () {
+	void Awake () {
 		universalHelper = GameObject.FindObjectOfType(typeof(UniversalHelperScript)) as UniversalHelperScript; // Find appropriate universalHelper script to use
+		matter = SpriteKeeperScript.Instance.GetMatter ();
+		antiMatter = SpriteKeeperScript.Instance.GetAntiMatter();
 		Vector3 tempVector = transform.localPosition;
 		tempVector.z = universalHelper.antiMatterZDistance;
 		transform.localPosition = tempVector;

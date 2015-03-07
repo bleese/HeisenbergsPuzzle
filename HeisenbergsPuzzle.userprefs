@@ -1,25 +1,29 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\EnvironmentScripts\MagneticFieldScript.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\LoadSave\MazeLoader.cs">
     <Files>
-      <File FileName="Assets\Scripts\EnvironmentScripts\AntiMatterScript.cs" Line="10" Column="71" />
+      <File FileName="Assets\Scripts\EnvironmentScripts\AntiMatterScript.cs" Line="42" Column="17" />
       <File FileName="Assets\Scripts\EnvironmentScripts\TriggerPoint.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\EditorManagerScript.cs" Line="176" Column="28" />
+      <File FileName="Assets\Scripts\EditorManagerScript.cs" Line="156" Column="25" />
       <File FileName="Assets\Scripts\Tunneling.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Controller.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\EnvironmentScripts\SpawnScript.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\EnvironmentScripts\SpawnScript.cs" Line="19" Column="50" />
       <File FileName="Assets\Scripts\IEnvironmentObject.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\InputSystem.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\LoadSave\MazeLoader.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\LoadSave\MazeLoader.cs" Line="145" Column="7" />
       <File FileName="Assets\Scripts\UIScripts\PauseManager.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\LevelManager.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\EnvironmentScripts\TeleporterScript.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\EnvironmentScripts\MeasurerScript.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\EnvironmentScripts\MagneticFieldScript.cs" Line="88" Column="3" />
+      <File FileName="Assets\Scripts\EnvironmentScripts\TeleporterScript.cs" Line="28" Column="50" />
+      <File FileName="Assets\Scripts\EnvironmentScripts\MeasurerScript.cs" Line="94" Column="43" />
+      <File FileName="Assets\Scripts\EnvironmentScripts\MagneticFieldScript.cs" Line="110" Column="63" />
       <File FileName="Assets\Scripts\CameraFollow.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\ChainTunnel.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\EnvironmentScripts\WallScript.cs" Line="64" Column="1" />
+      <File FileName="Assets\Scripts\EnvironmentScripts\WallScript.cs" Line="98" Column="6" />
       <File FileName="Assets\Scripts\EnvironmentScripts\GateScript.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Misc\SpriteKeeperScript.cs" Line="74" Column="19" />
+      <File FileName="Assets\Scripts\UniversalHelperScript.cs" Line="24" Column="3" />
+      <File FileName="Assets\Scripts\Energy.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\EnvironmentScripts\ElectricFieldScript.cs" Line="74" Column="16" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

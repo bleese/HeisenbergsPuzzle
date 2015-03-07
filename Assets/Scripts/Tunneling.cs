@@ -75,7 +75,7 @@ public class Tunneling : MonoBehaviour {
 	
 	//Tunneling process: Transports the player across the wall
 	private void Tunnel() {
-		if(collidingWall) { //If they are touching a wall
+		if(collidingWall && collidingWall.GetComponent<WallScript>().energyConsumption < 100) { //If they are touching a wall
 			
 			WallScript wallSc = collidingWall.GetComponent<WallScript>(); // Get the wall script of the wall its touching 
 			bool isHorizontal = wallSc.IsHorizontal(); //check if it's horizontal

@@ -21,17 +21,72 @@ public class SpriteKeeperScript : MonoBehaviour {
 	
   	public Sprite MFieldInto;
  	public Sprite MFieldOuto;
+ 	public Sprite antiMatter;
+ 	public Sprite matter;
+ 	public Sprite blackWall;
+ 	public Sprite yellowWall;
+ 	public Sprite redWall;
+ 	public Sprite greenWall;
+ 	public Sprite blueWall;
+ 	public Sprite pMeasurer;
+ 	public Sprite xMeasurer;
+ 	public Sprite uTele;
+ 	public Sprite aTele;
   	public SpriteRenderer spriteRender;
  	  
    	void Start() {
 		spriteRender = GetComponent<SpriteRenderer>(); 
    	}
-   
+   	
    	public Sprite GetMFieldInto() {
-    	return MFieldInto;
-   	} 
-   
-   	public Sprite GetMFieldOuto() {
-    	return MFieldOuto;
+   	  	return MFieldInto;
    	}
+   	
+   	public Sprite GetMFieldOuto() {
+   	  	return MFieldOuto;
+   	}
+   	
+	public Sprite GetAntiMatter() {
+		return antiMatter;
+	} 
+	
+	public Sprite GetMatter() {
+		return matter;
+	}
+	
+	public Sprite GetBlackWall() {
+		return blackWall;
+	} 
+	
+	public Sprite GetRedWall() {
+		return redWall;
+	}   	
+	
+	public Sprite GetYellowWall() {
+		return yellowWall;
+	} 
+	
+	public Sprite GetGreenWall() {
+		return greenWall;
+	}   	
+	
+	public Sprite GetBlueWall() {
+		return blueWall;
+	}
+	
+	public Sprite GetPMeasure() {
+		return pMeasurer;
+	} 
+	
+	public Sprite GetXMeasure() {
+		return xMeasurer;
+	}   	
+	
+	public Sprite GetUTele() {
+		return uTele;
+	} 
+	
+	public Sprite GetATele() {
+		return aTele;
+	}
 }

@@ -80,6 +80,8 @@ public class MeasurerScript : MonoBehaviour, IEnvironmentObject {
 	// Flips the wall;
 	public void Flip() {
 		pORxMeasure = !pORxMeasure;
+		//Debug.Log (spriteRenderer);
+		//Debug.Log (pMeasure);
 		if (spriteRenderer.sprite == pMeasure) {
 			spriteRenderer.sprite = xMeasure;
 		} else {
@@ -101,8 +103,10 @@ public class MeasurerScript : MonoBehaviour, IEnvironmentObject {
 	}
 	
 	// Use this for initialization
-	void Start () {
+	void Awake () {
 		universalHelper = GameObject.FindObjectOfType(typeof(UniversalHelperScript)) as UniversalHelperScript; // Find appropriate universalHelper script to use
+		pMeasure = SpriteKeeperScript.Instance.GetPMeasure();
+		xMeasure = SpriteKeeperScript.Instance.GetXMeasure();
 		spriteRenderer = GetComponent<SpriteRenderer>();
 		if (spriteRenderer.sprite != null) {
 			spriteRenderer.sprite = pMeasure;

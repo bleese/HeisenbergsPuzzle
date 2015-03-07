@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 public class ElectricFieldScript : MonoBehaviour, IEnvironmentObject {
-	public Vector2 direction; // Unit vector to specify the direction the electric field should push
+	private Vector2 direction; // Unit vector to specify the direction the electric field should push
+	public int flips = 0;
 	public float power; // The power the electric field pushes
 	private UniversalHelperScript universalHelper; // our universalHelper
 	private bool resizeDirection = false; // False = x direction, True = y direction
@@ -68,6 +69,10 @@ public class ElectricFieldScript : MonoBehaviour, IEnvironmentObject {
 		// We need to change the resizeDirection to keep it consitent
 		// Otherwise rotating the object will in effect rotate the resizeDirection as well;
 		ChangeResizeDirection();
+		flips++; // For the instantiator to now how many times to flip;
+		if (flips > 3) {
+		   flips = 0;
+		}
 		// We also need to change the electricField direction vector
 		if (direction == Vector2.up) {
 			direction = Vector2.right;
@@ -101,7 +106,7 @@ public class ElectricFieldScript : MonoBehaviour, IEnvironmentObject {
 	void Start () {
 		universalHelper = GameObject.FindObjectOfType(typeof(UniversalHelperScript)) as UniversalHelperScript; // Find appropriate universalHelper script to use
 		direction = Vector2.up;
-		power = 0f; // Temporarily 0 for editor reasons, when loading level will be 600f
+		power = 600f; // Temporarily 0 for editor reasons, when loading level will be 600f
 	}
 	
 	// Update is called once per frame

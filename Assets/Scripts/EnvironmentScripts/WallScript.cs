@@ -6,7 +6,7 @@ public class WallScript : MonoBehaviour, IEnvironmentObject {
 	public bool selected = false;
 	public bool horizontal; // False is vertical direction, true is horizontal direction
     public float rotationConstant = 1 / Mathf.Sqrt (2);
-    public float energyConsumption = 100f;
+    public int energyConsumption = 100;
     private Vector3 offset;
 	private bool antiMatter = false;
 	private SpriteRenderer spriteRenderer;
@@ -49,7 +49,7 @@ public class WallScript : MonoBehaviour, IEnvironmentObject {
 		}
 	}
 	
-	public void SetEnergy(float energy) {
+	public void SetEnergy(int energy) {
 		energyConsumption = energy;
 		antiMatter = false;
 		if (energy > 50) {
@@ -67,12 +67,17 @@ public class WallScript : MonoBehaviour, IEnvironmentObject {
 	}
 	
 	// Use this for initialization
-	void Start () {
+	void Awake () {
 	   universalHelper = GameObject.FindObjectOfType(typeof(UniversalHelperScript)) as UniversalHelperScript; // Find appropriate universalHelper script to use
 	   Vector3 tempPosition = transform.localPosition;
+	   black = SpriteKeeperScript.Instance.GetBlackWall();
+	   red = SpriteKeeperScript.Instance.GetRedWall();
+	   yellow = SpriteKeeperScript.Instance.GetYellowWall();
+	   green = SpriteKeeperScript.Instance.GetGreenWall();
+	   blue = SpriteKeeperScript.Instance.GetBlueWall();	
 	   tempPosition.z = UniversalHelperScript.Instance.wallZDistance;
 	   transform.localPosition = tempPosition;
-	   energyConsumption = 100f;
+	   energyConsumption = 100;
 	   if (Mathf.Round(transform.rotation.eulerAngles.z) == 90) {
 	      horizontal = true;
 	   } else {

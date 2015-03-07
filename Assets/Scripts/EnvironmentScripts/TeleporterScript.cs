@@ -49,8 +49,10 @@ public class TeleporterScript : MonoBehaviour, IEnvironmentObject {
 	}
 	
 	// Use this for initialization
-	void Start () {
+	void Awake () {
 		universalHelper = GameObject.FindObjectOfType(typeof(UniversalHelperScript)) as UniversalHelperScript; // Find appropriate universalHelper script to use
+		unactive = SpriteKeeperScript.Instance.GetUTele();
+		activeSprite = SpriteKeeperScript.Instance.GetATele();
 		spriteRenderer = GetComponent<SpriteRenderer>();
 		if (spriteRenderer.sprite != null) {
 			spriteRenderer.sprite = unactive;

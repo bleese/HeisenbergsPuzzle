@@ -68,11 +68,13 @@ public class MazeLoader : MonoBehaviour {
 					envName += "P";
 				}
 			}
-	 		
+			//Debug.Log (env);	 		
 	 		int state = 0;
 	 		// For antimatter state determines if it is antimatter or matter. 0 = antimatter, 1 = matter
-			if (env.tag == "AntiMatter" && env.GetComponent<AntiMatterScript>().isMatter) {
+			if (env.tag == "AntiMatter" && !env.GetComponent<AntiMatterScript>().isMatter) {
 	 			state = 1;
+	 		} else if (env.tag == "EField") {
+	 		 	state = env.GetComponent<ElectricFieldScript>().flips;
 	 		// For Magnetic field state refers to whether or not the magnetic field is into our out of page. 0 = into, 1 = out of
 	 		} else if (env.tag == "MField" && env.GetComponent<MagneticFieldScript>().direction) {
 	 			state = 1;
@@ -85,12 +87,15 @@ public class MazeLoader : MonoBehaviour {
 	 		// Whether or not the spawn is a player spawn or not
 	 		} else if (env.tag == "Spawn" && env.GetComponent<SpawnScript>().playerSpawn) {
 	 			state = 1;
-	 		} else if (env.tag == "Wall") {
+	 		} else if (env.tag == "Walls") {
+	 			//Debug.Log (env.GetComponent<WallScript>());
 				// The state is twice the value of the energy in the wall. If the wall is even then the wall is verticle, otherwise it is horizontal
-				state = 2*(int)env.GetComponent<WallScript>().energyConsumption;
+				state = 2*env.GetComponent<WallScript>().energyConsumption;
+				//Debug.Log (env.GetComponent<WallScript>().energyConsumption);
 				if (env.GetComponent<WallScript>().IsHorizontal()) {
 					state++;
 			    }
+			    //Debug.Log (state);
 	 		} else if (env.tag == "Trigger") {
 	 			TriggerPoint triggerScript = env.GetComponent<TriggerPoint>();
 	 			TriggerFlags stateFlag = 0;
