@@ -5,13 +5,13 @@ public class AntiMatterScript : MonoBehaviour, IEnvironmentObject {
 	private bool entity = true;
 	private float pushconstant = 30f;
 	private UniversalHelperScript universalHelper;
-	public bool isMatter = true; // Whether or not the antimatter is antimatter or simply matter
+	public bool isMatter = false; // Whether or not the antimatter is antimatter or simply matter
 	public Sprite antiMatter; // Sprite for field lines going into page
 	public Sprite matter; // Sprite for field lines going out of the page
 	private SpriteRenderer spriteRenderer; // Object to actually render the sprites
 	
 	void OnTriggerStay2D(Collider2D col) {
-		if(col.gameObject.tag == "Player" && entity && !isMatter) {
+		if(col.gameObject.tag == "Player" && entity && isMatter) {
 			Vector3 targetPosition = col.gameObject.transform.localPosition - this.transform.localPosition;
 			targetPosition.Normalize ();
 			this.rigidbody2D.AddForce (targetPosition*pushconstant);
@@ -19,7 +19,7 @@ public class AntiMatterScript : MonoBehaviour, IEnvironmentObject {
 	}
 	
 	void OnCollisionEnter2D(Collision2D col) {
-		if(col.gameObject.tag == "Player" && entity && !isMatter) {
+		if(col.gameObject.tag == "Player" && entity && isMatter) {
 			Debug.Log ("Dead");
 			Energy energyscript = col.gameObject.GetComponent<Energy>();
 			energyscript.DecreaseEnergy (100);

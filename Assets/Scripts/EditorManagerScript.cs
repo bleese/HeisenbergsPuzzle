@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using System;
@@ -147,7 +147,6 @@ public class EditorManagerScript : MonoBehaviour {
 	public void Create(ObjectSet obj) {
 		GameObject tempEnv = null;
 		if (obj.name.Contains ("Barrier")) {
-		    Debug.Log (obj.toggleState);
 		    // NOTE, if EVEN then vertical, else horizontal. This implies that the final EVEN energy value is TWICe the total energy
 		    // Example: Horizontal wall with 100 energy would have a togglestate of 201
 			tempEnv = Instantiate (wall,obj.position, obj.rotation) as GameObject;
@@ -160,7 +159,7 @@ public class EditorManagerScript : MonoBehaviour {
 		} else if (obj.name.Contains ("ElectricField")) {
 			tempEnv = Instantiate (efield,obj.position,Quaternion.identity) as GameObject; // we use default rotation because we handle flips ourselves
 			tempEnv.transform.localScale = obj.scale;
-			for (int i = 0; i < obj.toggleState;i++) 
+			for (int i = 0; i < obj.toggleState;i++)
 			 	tempEnv.GetComponent<ElectricFieldScript>().Flip ();
 		} else if (obj.name.Contains("Antimatter")) {
 			tempEnv = Instantiate (antiMatter,obj.position, obj.rotation) as GameObject;
@@ -181,7 +180,6 @@ public class EditorManagerScript : MonoBehaviour {
 			tempEnv = Instantiate (measurer,obj.position, obj.rotation) as GameObject;
 			tempEnv.transform.localScale = obj.scale;	
 			if (obj.toggleState == 1) {
-			    Debug.Log (tempEnv);
 				tempEnv.GetComponent<MeasurerScript>().Flip();
 			}
 		}  else if (obj.name.Contains("SpawnPoint")) {

@@ -103,7 +103,7 @@ public class ElectricFieldScript : MonoBehaviour, IEnvironmentObject {
 	}
 	
 	// Use this for initialization
-	void Start () {
+	void Awake () {
 		universalHelper = GameObject.FindObjectOfType(typeof(UniversalHelperScript)) as UniversalHelperScript; // Find appropriate universalHelper script to use
 		direction = Vector2.up;
 		power = 600f; // Temporarily 0 for editor reasons, when loading level will be 600f

@@ -92,7 +92,7 @@ public class GateScript : MonoBehaviour, IEnvironmentObject {
 		this.collider2D.enabled = !this.collider2D.enabled;
 	}
 	// Use this for initialization
-	void Start () {
+	void Awake () {
 		universalHelper = GameObject.FindObjectOfType(typeof(UniversalHelperScript)) as UniversalHelperScript; // Find appropriate universalHelper script to use
 	}
 	
