@@ -11,7 +11,9 @@ public class GateScript : MonoBehaviour, IEnvironmentObject {
 	public bool isMatter = true;
 	private UniversalHelperScript universalHelper;
 	private Vector3 offset;
-	
+	public Sprite gate;
+	public Sprite antiGate;
+	private SpriteRenderer spriteRenderer;
 
 	// To avoid auto-centering
 	void OnMouseDown() {
@@ -72,6 +74,11 @@ public class GateScript : MonoBehaviour, IEnvironmentObject {
 	// Flips the wall;
 	public void Flip() {
 		isMatter = !isMatter;
+		if (spriteRenderer.sprite == gate) {
+			spriteRenderer.sprite = antiGate;
+		} else {
+			spriteRenderer.sprite = gate;
+		}
 	}
 	
 	// We snap the wall into a grid
@@ -94,6 +101,12 @@ public class GateScript : MonoBehaviour, IEnvironmentObject {
 	// Use this for initialization
 	void Awake () {
 		universalHelper = GameObject.FindObjectOfType(typeof(UniversalHelperScript)) as UniversalHelperScript; // Find appropriate universalHelper script to use
+		gate = SpriteKeeperScript.Instance.GetGate ();
+		antiGate = SpriteKeeperScript.Instance.GetAntiGate ();
+		spriteRenderer = GetComponent<SpriteRenderer>();
+		if (spriteRenderer.sprite != null) {
+			spriteRenderer.sprite = gate;
+		}
 	}
 	
 	// Update is called once per frame

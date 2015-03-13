@@ -685,6 +685,7 @@ MonoBehaviour:
   wallZDistance: -1.5
   antiMatterZDistance: 5
   defaultGridSize: .100000001
+  spawnPoint: {fileID: 0}
 --- !u!4 &474352766
 Transform:
   m_ObjectHideFlags: 0
@@ -1751,7 +1752,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MFieldInto: {fileID: 21300000, guid: 20c1b749aa8d10f4c84ef8f5cd63f489, type: 3}
   MFieldOuto: {fileID: 21300000, guid: afac8f4d754d1b245ba7fc3b8a12c6a5, type: 3}
-  spriteRender: {fileID: 0}
+  antiMatter: {fileID: 21300000, guid: 0d5a6395950c5834e88707eb380c15f7, type: 3}
+  matter: {fileID: 21300000, guid: 3208fdfbd70f1244d8ee58377d0df352, type: 3}
+  blackWall: {fileID: 21300000, guid: afa16fd9dfbd4e2408f7e8a8d00efba9, type: 3}
+  yellowWall: {fileID: 21300000, guid: 75b2e96e01dc82542a3dd8f27a5245ca, type: 3}
+  redWall: {fileID: 21300000, guid: 91bbbbc27eb4d0948b1d4ea7b80690b1, type: 3}
+  greenWall: {fileID: 21300000, guid: ba24e8918d8d04748af044ed3e0731ac, type: 3}
+  blueWall: {fileID: 21300000, guid: b0a8908e7897b6344bb3f660100d6376, type: 3}
+  pMeasurer: {fileID: 21300000, guid: fc45719fb43e6a043aac2b7b8706820b, type: 3}
+  xMeasurer: {fileID: 21300000, guid: 8e94b9270a1249a4baaf6e67b920dafe, type: 3}
+  uTele: {fileID: 21300000, guid: 4dc9d28ebadf31a459cb869d07a81083, type: 3}
+  aTele: {fileID: 21300000, guid: 182d52833f574164389bed58b7b589c9, type: 3}
+  gate: {fileID: 21300000, guid: 6a9f0ef9b392cea4d8c764710207630c, type: 3}
+  antiGate: {fileID: 21300000, guid: 10cffdd4cfd8b2f45924d13708b58a65, type: 3}
 --- !u!4 &1070642218
 Transform:
   m_ObjectHideFlags: 0

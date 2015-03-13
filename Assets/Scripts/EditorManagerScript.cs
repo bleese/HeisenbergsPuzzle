@@ -73,7 +73,9 @@ public class EditorManagerScript : MonoBehaviour {
 	List<GameObject> environments = new List<GameObject>();
 	float ResizeExtraPush = 10f;
 	float create; // 0 = Wall, 1 = Electric field, 2 = magnetic Field
-	
+	// PauseManager is really weird, so disabling input bruteForceStyle;
+	bool enableInput = true; // Enables input feed events
+	bool editor = false; // Checks whether or not the editor is true
 	// Something ONLY for teleporters (may change later)
 	TeleporterScript activatedTeleporter = null;
 	
@@ -102,43 +104,56 @@ public class EditorManagerScript : MonoBehaviour {
 	
 	// Listens for appropriate Input
 	void OnInputEvent(Vector2 rawValue, ActionType action) {
-		if (action == ActionType.Create) {
-			Create (create);
-		} else if (action == ActionType.Select) {
-			Select ();
-		} else if (action == ActionType.ChooseWall) {
-			create = 0; // Create a wll
-		} else if (action == ActionType.ChooseEField) {
-			create = 1;
-		} else if (action == ActionType.ChooseMField) {
-			create = 2;
-		} else if (action == ActionType.ChooseMeasurer) {
-			create = 3;
-		} else if (action == ActionType.ChooseAntiMatter) {
-			create = 4;
-		} else if (action == ActionType.ChooseTeleporter) {
-			create = 5;
-		} else if (action == ActionType.ChooseSpawn) {
-			create = 6;		
-		} else if (action == ActionType.ChooseAltSpawn) {
+		if (action == ActionType.Pause) {
+			enableInput = !enableInput;
+			// If the editor is enabled, we have to do some extra things to make sure objects don't get dragged around
+			if (enableInput == false && UniversalHelperScript.Instance.editor == true) {
+				UniversalHelperScript.Instance.editor = false;
+				editor = true;
+			} else if (editor == true && enableInput == true) {
+				UniversalHelperScript.Instance.editor = true;
+				editor = false;
+			}
+		}
+		if (enableInput) {
+			if (action == ActionType.Create) {
+				Create (create);
+			} else if (action == ActionType.Select) {
+				Select ();
+			} else if (action == ActionType.ChooseWall) {
+				create = 0; // Create a wll
+			} else if (action == ActionType.ChooseEField) {
+				create = 1;
+			} else if (action == ActionType.ChooseMField) {
+				create = 2;
+			} else if (action == ActionType.ChooseMeasurer) {
+				create = 3;
+			} else if (action == ActionType.ChooseAntiMatter) {
+				create = 4;
+			} else if (action == ActionType.ChooseTeleporter) {
+				create = 5;
+			} else if (action == ActionType.ChooseSpawn) {
+				create = 6;		
+			} else if (action == ActionType.ChooseAltSpawn) {
 			create = 7;		
-		} else if (action == ActionType.ChooseGate) {
-			create = 8;
-		} else if (action == ActionType.ChooseTriggerPoint) {
-			create = 9;
-		} else if (selectedEnvironment != null) {
-			if (action == ActionType.Destroy) {
-				DestroyEnv ();
-			} else if (action == ActionType.Snap) {
-				Snap ();
-			} else if (action == ActionType.Flip) {
-				Flip ();
-			} else if (action == ActionType.Resize) {
-				Resize (rawValue.x*ResizeExtraPush);
-			} else if (action == ActionType.ResizeDirection) {
-				ResizeDirection ();
-			} else if (action == ActionType.DisableEntity) {
-				SetEntityField();
+			} else if (action == ActionType.ChooseGate) {
+				create = 8;
+			} else if (action == ActionType.ChooseTriggerPoint) {
+				create = 9;
+			} else if (selectedEnvironment != null) {
+				if (action == ActionType.Destroy) {
+					DestroyEnv ();
+				} else if (action == ActionType.Snap) {
+					Snap ();
+				} else if (action == ActionType.Flip) {
+					Flip ();
+				} else if (action == ActionType.Resize) {
+					Resize (rawValue.x*ResizeExtraPush);
+				} else if (action == ActionType.ResizeDirection) {
+					ResizeDirection ();
+				} else if (action == ActionType.DisableEntity) {
+					SetEntityField();
+				}
 			}
 		}
 	}

@@ -11,7 +11,6 @@ public class PauseManager : MonoBehaviour {
 	public InputField saveText;
 	private ComboBox comboBox;
 	
-	
 	// Use this for initialization
 	void Start () {
 		InputSystem.Instance.OnInputPlayer += OnInputEvent;
@@ -49,10 +48,8 @@ public class PauseManager : MonoBehaviour {
 	}
 	
 	public void Pause() {
-		
 		canvas.enabled = !canvas.enabled;
 		Time.timeScale = Time.timeScale == 0 ? 1 : 0;
-		
 	}
 	
 	private void UpdateText() {

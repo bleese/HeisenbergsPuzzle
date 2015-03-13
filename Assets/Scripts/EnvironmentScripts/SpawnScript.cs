@@ -20,6 +20,7 @@ public class SpawnScript : MonoBehaviour, IEnvironmentObject {
 		SetEditor (universalHelper.editor);
 		if(playerSpawn) { //If it is the player spawn point, give it the distinctive sprite appearance
 			spriteRender.sprite = PlayerSprite;
+			universalHelper.spawnPoint = this; // There can only be one spawn point, and this is it
 		} else {
 			spriteRender.sprite = EnemySprite;
 		}
@@ -39,6 +40,12 @@ public class SpawnScript : MonoBehaviour, IEnvironmentObject {
 	// Update is called once per frame
 	void Update () {
 	
+	}
+	
+	public void RespawnBackToPoint() {
+		GameObject player = GameObject.FindGameObjectWithTag ("Player");
+		player.transform.position = this.transform.position;
+		player.GetComponent<Energy>().DecreaseEnergy (-100); // Replenishes the Players health
 	}
 	
 	// Function is called when mouse is held down

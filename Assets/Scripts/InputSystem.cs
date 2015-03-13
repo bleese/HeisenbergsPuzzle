@@ -72,7 +72,8 @@ public class InputSystem : MonoBehaviour {
 			}
 		
 			//Check if jump input was recived
-			if(Input.GetAxis("Uncertainty") != 0) {
+			if(Input.GetAxis("Uncertainty") != 0) { // USE for gradual
+			//if (Input.GetButtonDown ("Uncertainty")) { // USE for insta-snap
 			    // We're only passing one value in so the y component of our vector is always zero
 				rawVal = new Vector2 (Input.GetAxis("Uncertainty"), 0);
 				OnInputPlayer(rawVal, ActionType.Uncertainty);
@@ -104,6 +105,11 @@ public class InputSystem : MonoBehaviour {
 			// Just passing it in because apparently "null" is not a valid vector
 			if (Input.GetKeyDown (KeyCode.Space)) {
 		   		OnInputEditor(rawVal, ActionType.Create);
+			}
+		
+			// Pausing the game
+			if (Input.GetButtonDown("Cancel")) {
+				OnInputEditor(rawVal,ActionType.Pause);
 			}
 		
 			// Destroying a wall that is selected

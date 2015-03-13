@@ -32,11 +32,21 @@ public class SpriteKeeperScript : MonoBehaviour {
  	public Sprite xMeasurer;
  	public Sprite uTele;
  	public Sprite aTele;
-  	public SpriteRenderer spriteRender;
+ 	public Sprite gate;
+ 	public Sprite antiGate;
+  	private SpriteRenderer spriteRender;
  	  
    	void Start() {
 		spriteRender = GetComponent<SpriteRenderer>(); 
    	}
+   	
+   	public Sprite GetGate() {
+   	   return gate;
+   	}
+   	
+	public Sprite GetAntiGate() {
+		return antiGate;
+	}
    	
    	public Sprite GetMFieldInto() {
    	  	return MFieldInto;

@@ -42,6 +42,7 @@ public class Energy : MonoBehaviour {
 	
 	public void Destroy() {
 		
+		UniversalHelperScript.Instance.spawnPoint.RespawnBackToPoint ();
 		Debug.Log ("Destroy");
 		
 	}

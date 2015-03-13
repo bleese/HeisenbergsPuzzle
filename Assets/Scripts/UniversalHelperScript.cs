@@ -40,6 +40,7 @@ public class UniversalHelperScript : MonoBehaviour {
 	public float wallZDistance = -1.5f; // The Wall should be on the second layer
 	public float antiMatterZDistance = 5f; // Antimatter should be on the bottom layer (to avoid editor problems due to the antimatters massive trigger collider)
 	public float defaultGridSize = 0.1f;
+	public SpawnScript spawnPoint; // A reference to the spawnPoint
 
 	public void InformPlayerCreation(GameObject player) {
 		OnPlayer(player);
@@ -65,5 +66,4 @@ public class UniversalHelperScript : MonoBehaviour {
 		freeVector *= defaultGridSize;
 		return freeVector;
 	}
-	
 }

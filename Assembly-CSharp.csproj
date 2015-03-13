@@ -82,6 +82,7 @@
      <None Include="Assets\Resources\Mazes\test00.txt" />
      <None Include="Assets\Resources\Mazes\Test5.txt" />
      <None Include="Assets\Resources\Mazes\FirstProperLevel.txt" />
+     <None Include="Assets\Resources\Mazes\FirstProperLevel2.txt" />
      <None Include="Assets\Resources\Mazes\Test3.txt" />
      <None Include="Assets\Resources\Mazes\Test8.txt" />
      <None Include="Assets\Resources\Mazes\TestLevel1.txt" />
