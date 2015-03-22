@@ -81,7 +81,7 @@ public class TriggerPoint : MonoBehaviour, IEnvironmentObject {
 		
 	// Sets whether or not the field should have a force
 	public void ToggleEntity () {
-		this.collider2D.enabled = !this.collider2D.enabled;
+		this.GetComponent<Collider2D>().enabled = !this.GetComponent<Collider2D>().enabled;
 	}
 	
 	//Set the level end flag to true

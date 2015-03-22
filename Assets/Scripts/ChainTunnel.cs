@@ -93,7 +93,7 @@ public class ChainTunnel : MonoBehaviour {
 	private void ChainStart() {
 		chaining = true; 
 		controller.DisableInput(); //Disables the ability for the player to move
-		rigidbody2D.velocity = new Vector2(0,0); //Cancels any momentum 
+		GetComponent<Rigidbody2D>().velocity = new Vector2(0,0); //Cancels any momentum 
 		chain = new List<Vector2>();
 		chainLineUpdate = true;
 		

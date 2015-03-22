@@ -16,7 +16,7 @@ public class ElectricFieldScript : MonoBehaviour, IEnvironmentObject {
 			if (!universalHelper.playerScript.GetMatter ()) {
 				newForce *= -1;
 			}
-			col.gameObject.rigidbody2D.AddForce (newForce);
+			col.gameObject.GetComponent<Rigidbody2D>().AddForce (newForce);
 		}
 		//Debug.Log (col.gameObject);
 	}

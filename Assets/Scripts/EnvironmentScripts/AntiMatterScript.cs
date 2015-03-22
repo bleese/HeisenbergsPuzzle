@@ -14,7 +14,7 @@ public class AntiMatterScript : MonoBehaviour, IEnvironmentObject {
 		if(col.gameObject.tag == "Player" && entity && ShouldAttack ()) {
 			Vector3 targetPosition = col.gameObject.transform.localPosition - this.transform.localPosition;
 			targetPosition.Normalize ();
-			this.rigidbody2D.AddForce (targetPosition*pushconstant);
+			this.GetComponent<Rigidbody2D>().AddForce (targetPosition*pushconstant);
 		}
 	}
 	

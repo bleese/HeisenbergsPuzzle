@@ -18,7 +18,7 @@ public class MagneticFieldScript : MonoBehaviour, IEnvironmentObject {
 	
 	void OnTriggerStay2D(Collider2D col) {
 		if (col.gameObject.gameObject.tag == "Player" && force == true) {
-			Vector2 velocity = col.gameObject.rigidbody2D.velocity;
+			Vector2 velocity = col.gameObject.GetComponent<Rigidbody2D>().velocity;
 			float temp = velocity.x;
 			velocity.x = -velocity.y;
 			velocity.y = temp;
@@ -28,7 +28,7 @@ public class MagneticFieldScript : MonoBehaviour, IEnvironmentObject {
 			if (!direction) {
 		   		velocity *= -1;
 			}
-			col.gameObject.rigidbody2D.AddForce (velocity*power);
+			col.gameObject.GetComponent<Rigidbody2D>().AddForce (velocity*power);
 		}
 	}
 	

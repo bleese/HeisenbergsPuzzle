@@ -65,7 +65,7 @@ public class Controller : MonoBehaviour {
     }
 
    void Move(Vector2 rawValue) {
-      rigidbody2D.velocity = rawValue*maxspeed;
+      GetComponent<Rigidbody2D>().velocity = rawValue*maxspeed;
       //rigidbody2D.AddForce (rawValue*maxspeed);
    }
    
@@ -100,7 +100,7 @@ public class Controller : MonoBehaviour {
 		Vector3 sizeUnc = transform.localScale;
 		float randomConstraint = momentumConstant*(maxSize - sizeUnc.x);
 		float speedUnc = UnityEngine.Random.Range(-randomConstraint, randomConstraint);
-		Vector2 currentVelocity = rigidbody2D.velocity;
+		Vector2 currentVelocity = GetComponent<Rigidbody2D>().velocity;
 		Vector3 currentPosition = transform.localPosition;
 		if (currentVelocity.x != 0 && Mathf.Abs (currentVelocity.x) + speedUnc > 0) {
 			tempVector = currentPosition;
