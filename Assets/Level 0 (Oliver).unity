@@ -683,7 +683,7 @@ MonoBehaviour:
   cameraZDistance: 10
   playerZDistance: -2
   wallZDistance: -1.5
-  antiMatterZDistance: 5
+  antiMatterZDistance: 4
   defaultGridSize: .100000001
   spawnPoint: {fileID: 0}
 --- !u!4 &474352766
@@ -823,6 +823,45 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 851157110}
   m_GameObject: {fileID: 577405981}
+--- !u!1 &600052804
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 600052806}
+  - 114: {fileID: 600052805}
+  m_Layer: 0
+  m_Name: MazeLoader
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &600052805
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 600052804}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61378b846d03440fdb749782fcc34086, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &600052806
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 600052804}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 398.5, y: 168.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
 --- !u!1 &682095603
 GameObject:
   m_ObjectHideFlags: 0
@@ -2817,6 +2856,45 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 851157110}
   m_GameObject: {fileID: 1976094237}
+--- !u!1 &2023593005
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 2023593007}
+  - 114: {fileID: 2023593006}
+  m_Layer: 0
+  m_Name: LevelManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2023593006
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2023593005}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76b6258e50f934ff7bdd506c2523f67b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &2023593007
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2023593005}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 398.5, y: 168.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
 --- !u!1 &2070051392
 GameObject:
   m_ObjectHideFlags: 0

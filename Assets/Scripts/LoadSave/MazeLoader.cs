@@ -71,7 +71,7 @@ public class MazeLoader : MonoBehaviour {
 			//Debug.Log (env);	 		
 	 		int state = 0;
 	 		// For antimatter state determines if it is antimatter or matter. 0 = antimatter, 1 = matter
-			if (env.tag == "AntiMatter" && !env.GetComponent<AntiMatterScript>().isMatter) {
+			if (env.tag == "AntiMatter" && env.GetComponent<AntiMatterScript>().isMatter) {
 	 			state = 1;
 	 		} else if (env.tag == "EField") {
 	 		 	state = env.GetComponent<ElectricFieldScript>().flips;

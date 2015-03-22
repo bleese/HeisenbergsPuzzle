@@ -34,10 +34,10 @@ public class SpriteKeeperScript : MonoBehaviour {
  	public Sprite aTele;
  	public Sprite gate;
  	public Sprite antiGate;
-  	private SpriteRenderer spriteRender;
+  	//private SpriteRenderer spriteRender;
  	  
    	void Start() {
-		spriteRender = GetComponent<SpriteRenderer>(); 
+		//spriteRender = GetComponent<SpriteRenderer>(); 
    	}
    	
    	public Sprite GetGate() {

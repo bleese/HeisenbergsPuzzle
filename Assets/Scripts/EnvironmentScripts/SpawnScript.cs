@@ -46,6 +46,9 @@ public class SpawnScript : MonoBehaviour, IEnvironmentObject {
 		GameObject player = GameObject.FindGameObjectWithTag ("Player");
 		player.transform.position = this.transform.position;
 		player.GetComponent<Energy>().DecreaseEnergy (-100); // Replenishes the Players health
+		string mapName = LevelManager.Instance.RetrieveCurrentMap();
+		Debug.Log (mapName);
+		MazeLoader.Instance.LoadScene (mapName); // Loads the game again
 	}
 	
 	// Function is called when mouse is held down

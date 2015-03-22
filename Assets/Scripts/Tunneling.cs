@@ -123,7 +123,7 @@ public class Tunneling : MonoBehaviour {
 		controller.DisableInput();
 		while(Vector3.Distance(transform.position, target) > 0.17f ) {
 			
-			if(Vector3.Distance(transform.position, target) > 1.8f) {
+			if(Vector3.Distance(transform.position, target) > 1.2f) {
 				break;
 			}
 			

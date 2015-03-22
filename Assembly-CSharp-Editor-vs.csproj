@@ -47,20 +47,9 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Prefabs\UI\ComboBox\Scripts\Editor\ComboBoxEditor.cs" />
-     <None Include="Assets\Resources\Mazes\TestLevel02.txt" />
-     <None Include="Assets\Resources\Mazes\TriggerTest.txt" />
-     <None Include="Assets\Resources\Mazes\Test6.txt" />
-     <None Include="Assets\Resources\Mazes\TestLevel0.txt" />
-     <None Include="Assets\Resources\Mazes\TestLevel04.txt" />
-     <None Include="Assets\Resources\Mazes\test00.txt" />
-     <None Include="Assets\Resources\Mazes\Test5.txt" />
-     <None Include="Assets\Resources\Mazes\FirstProperLevel.txt" />
-     <None Include="Assets\Resources\Mazes\FirstProperLevel2.txt" />
-     <None Include="Assets\Resources\Mazes\Test3.txt" />
-     <None Include="Assets\Resources\Mazes\Test8.txt" />
-     <None Include="Assets\Resources\Mazes\TestLevel1.txt" />
-     <None Include="Assets\Resources\Mazes\test01.txt" />
-     <None Include="Assets\Resources\Mazes\TestLevel03.txt" />
+     <None Include="Assets\Resources\Mazes\TLevel01.txt" />
+     <None Include="Assets\Resources\Mazes\TLevel02.txt" />
+     <None Include="Assets\Resources\Mazes\TLevel03.txt" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/4.6.1/UnityEngine.UI.dll</HintPath>
  </Reference>

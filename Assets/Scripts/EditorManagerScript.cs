@@ -297,9 +297,26 @@ public class EditorManagerScript : MonoBehaviour {
 	}
 	
 	private void Select() {
-		RaycastHit2D hit = Physics2D.Raycast (Camera.main.ScreenToWorldPoint (Input.mousePosition), Vector2.zero);
-		if (hit.collider != null) {
-			selectedEnvironment = hit.collider.gameObject; // Error with antimatter due to their large trigger colliders (FIXED)
+		RaycastHit2D finalHit = Physics2D.Raycast (Camera.main.ScreenToWorldPoint (Input.mousePosition), Vector2.zero);
+		/*RaycastHit2D[] hits = Physics2D.RaycastAll (Camera.main.ScreenToWorldPoint (Input.mousePosition), Vector2.zero);
+		RaycastHit2D finalHit = new RaycastHit2D();
+		Debug.Log (hits);
+		// Must do this to assure antimatter doesn't screw around with it's enormous trigger collider
+		foreach (RaycastHit2D hit in hits) {
+			// We've hit antiMatter
+			if (hit.collider.tag == "AntiMatter") {
+				// If we've hit close enough to the antimatter that it's the thing we're trying to grab...
+				if (Mathf.Abs (hit.point.magnitude-hit.collider.transform.localPosition.magnitude) < 0.5f) {
+					finalHit = hit;
+					break;
+				}
+			} else {
+				finalHit = hit;
+				break;
+			}
+		}*/
+		if (finalHit.collider != null) {
+			selectedEnvironment = finalHit.collider.gameObject; // Error with antimatter due to their large trigger colliders (FIXED)
 			selectedScript = getValidComponent (selectedEnvironment);
 		}
 	}

@@ -38,7 +38,7 @@ public class UniversalHelperScript : MonoBehaviour {
 	public float cameraZDistance = 10f; // The distance the camera is away from the other objects (used by every IEnvironmentObject)
 	public float playerZDistance = -2f; // The player should be above all other objects
 	public float wallZDistance = -1.5f; // The Wall should be on the second layer
-	public float antiMatterZDistance = 5f; // Antimatter should be on the bottom layer (to avoid editor problems due to the antimatters massive trigger collider)
+	public float antiMatterZDistance = -1f; // Antimatter should be on the bottom layer (to avoid editor problems due to the antimatters massive trigger collider)
 	public float defaultGridSize = 0.1f;
 	public SpawnScript spawnPoint; // A reference to the spawnPoint
 

@@ -60,7 +60,8 @@ public class Controller : MonoBehaviour {
    
    void ApplyUncertainty(Vector2 uncertaintyVector) {
 		// Prototype of instant SNAPPING
-		/*if (canChangeSize) {
+		/*
+		if (canChangeSize) {
 			Vector3 tempVector = transform.localScale;
 			if (tempVector.x == maxSize) {
 				tempVector = new Vector3(minSize,minSize,0); 
@@ -68,7 +69,8 @@ public class Controller : MonoBehaviour {
 				tempVector = new Vector3(maxSize, maxSize,0);
 			}
 			transform.localScale = tempVector;
-		}*/
+		}
+		*/
 		// Gradual Uncertainty
    		if (canChangeSize) {
     	    float uncertainty = uncertaintyVector.x;
