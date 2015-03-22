@@ -28,7 +28,7 @@ If a trigger triggers Generic1 & Generic2, then its flag value is  0010 | 0100 =
 public enum TriggerFlags {
 	
 	LevelEnd = 1,
-	Generic1 = 2,
+	MatterConversion = 2,
 	Generic2 = 4,
 	Generic3 = 8
 	
@@ -217,6 +217,9 @@ public class EditorManagerScript : MonoBehaviour {
 			if((flags & TriggerFlags.LevelEnd) != 0) {
 				tempEnv.GetComponent<TriggerPoint>().SetLevelEnd();
 		  	}
+		  	//if (flags & TriggerFlags.MatterConversion != 0) {
+		  	//	tempEnv.GetComponent<TriggerPoint>().convertMatter = true;
+		  	//}
 		}  else if (obj.name.Contains("Gate")) {
 			tempEnv = Instantiate (gate,obj.position, obj.rotation) as GameObject;
 			tempEnv.transform.localScale = obj.scale;

@@ -12,7 +12,11 @@ public class ElectricFieldScript : MonoBehaviour, IEnvironmentObject {
 
 	void OnTriggerStay2D(Collider2D col) {
 		if (col.gameObject.tag == "Player") {
-			col.gameObject.rigidbody2D.AddForce (direction*power);
+			Vector2 newForce = direction*power;
+			if (!universalHelper.playerScript.GetMatter ()) {
+				newForce *= -1;
+			}
+			col.gameObject.rigidbody2D.AddForce (newForce);
 		}
 		//Debug.Log (col.gameObject);
 	}

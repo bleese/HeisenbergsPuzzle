@@ -41,8 +41,10 @@ public class UniversalHelperScript : MonoBehaviour {
 	public float antiMatterZDistance = -1f; // Antimatter should be on the bottom layer (to avoid editor problems due to the antimatters massive trigger collider)
 	public float defaultGridSize = 0.1f;
 	public SpawnScript spawnPoint; // A reference to the spawnPoint
+	public Controller playerScript; // A reference to the players controller
 
 	public void InformPlayerCreation(GameObject player) {
+		playerScript = player.GetComponent<Controller>();
 		OnPlayer(player);
 	}
 	

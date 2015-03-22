@@ -7,6 +7,7 @@ public class TriggerPoint : MonoBehaviour, IEnvironmentObject {
 	private UniversalHelperScript universalHelper;
 	
 	public bool levelEnd;	//If trigger marks the end of the level
+	public bool convertMatter; // If trigger marks swapping the player from matter to AntiMatter;
 	
 	// Use this for initialization
 	void Start () {
@@ -26,9 +27,17 @@ public class TriggerPoint : MonoBehaviour, IEnvironmentObject {
 				
 			}
 			
+			if (convertMatter) {
+				ConvertMatter();
+				
+			}
 		}
 		
 		
+	}
+	
+	private void ConvertMatter() {
+		universalHelper.playerScript.SetMatter (!universalHelper.playerScript.GetMatter ());
 	}
 	
 	//Loads next level provided by the LevelManager

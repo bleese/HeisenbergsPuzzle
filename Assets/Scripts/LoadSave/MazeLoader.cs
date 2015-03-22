@@ -101,6 +101,8 @@ public class MazeLoader : MonoBehaviour {
 	 			TriggerFlags stateFlag = 0;
 	 			if(triggerScript.levelEnd) {
 	 				stateFlag |= TriggerFlags.LevelEnd;
+	 			} else if(triggerScript.convertMatter) {
+	 				stateFlag |= TriggerFlags.MatterConversion;
 	 			}
 	 			
 	 			state = ((int)stateFlag);

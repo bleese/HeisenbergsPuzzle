@@ -10,6 +10,10 @@ public class Controller : MonoBehaviour {
 	private float momentumConstant = 1f;
 	private float playerZDistance = -2f;
 	private bool canChangeSize = true;
+	private bool isMatter = true;
+	private Sprite playersprite;
+	private Sprite antiPlayerSprite;
+	public SpriteRenderer spriteRenderer;
 	//Usable scripts
 	public CameraFollow cameraScript;
 	
@@ -22,6 +26,13 @@ public class Controller : MonoBehaviour {
 	// useful variables
 	private Vector3 tempVector;
 
+	// The spriteRenderer needs to be in Awake, not start, as the script uses the sprites given BEFORE the script is even initialized!
+	void Awake () {
+		playersprite = SpriteKeeperScript.Instance.GetPlayer ();
+		antiPlayerSprite = SpriteKeeperScript.Instance.GetAntiPlayer ();
+		spriteRenderer = GetComponent<SpriteRenderer>();
+		spriteRenderer.sprite = playersprite;
+	}
 
 	// Use this for initialization
 	void Start () {
@@ -74,10 +85,11 @@ public class Controller : MonoBehaviour {
 		// Gradual Uncertainty
    		if (canChangeSize) {
     	    float uncertainty = uncertaintyVector.x;
-			uncertainty *= expansionConstant;	
+			uncertainty *= expansionConstant;
 			Vector3 sizeUnc = transform.localScale;
 			Vector3 incrementSizeUnc = new Vector3 (uncertainty, uncertainty, 0);
 			if ((uncertainty < 0 && sizeUnc.x > minSize) || (uncertainty > 0 && sizeUnc.x < maxSize)) {
+				maxspeed += -uncertainty*2;
 				transform.localScale = sizeUnc + incrementSizeUnc;
 			}
 		}
@@ -116,6 +128,20 @@ public class Controller : MonoBehaviour {
 		}
 	}
 	
+	public bool GetMatter() {
+		return isMatter;
+	}
+	
+	public void SetMatter(bool newMatter) {
+		isMatter = newMatter;
+		
+		if (isMatter = true) {
+			spriteRenderer.sprite = playersprite;
+		} else {
+			spriteRenderer.sprite = antiPlayerSprite;
+		}
+	}
+		
 	public void EnableInput() {
 	   InputSystem.Instance.OnInputPlayer += OnInputEvent;
 	}

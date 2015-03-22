@@ -43,7 +43,7 @@ public class WallScript : MonoBehaviour, IEnvironmentObject {
 	}
 	
 	void OnCollisionEnter2D(Collision2D col) {
-		if(col.gameObject.tag == "Player" && antiMatter) {
+		if(col.gameObject.tag == "Player" && ShouldDestroy ()) {
 			Energy health = col.gameObject.GetComponent<Energy>();
 			health.DecreaseEnergy (100f);
 		}
@@ -147,6 +147,10 @@ public class WallScript : MonoBehaviour, IEnvironmentObject {
 	// Update is called once per frame
 	void FixedUpdate () {
 
+	}
+	
+	private bool ShouldDestroy() {
+	  return (antiMatter == universalHelper.playerScript.GetMatter ());
 	}
 }
 

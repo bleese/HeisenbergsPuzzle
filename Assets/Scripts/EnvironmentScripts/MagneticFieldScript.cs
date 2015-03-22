@@ -22,6 +22,9 @@ public class MagneticFieldScript : MonoBehaviour, IEnvironmentObject {
 			float temp = velocity.x;
 			velocity.x = -velocity.y;
 			velocity.y = temp;
+			if (!universalHelper.playerScript.GetMatter ()) {
+				velocity *= -1;
+			}
 			if (!direction) {
 		   		velocity *= -1;
 			}
