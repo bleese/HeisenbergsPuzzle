@@ -158,6 +158,15 @@ public class EditorManagerScript : MonoBehaviour {
 		}
 	}
 	
+	// If we are given a "State" instead of an objectSet
+	public void Create(State obj) {
+		if (obj.name == "") { // identify the object
+			// TempEnv = instantiate(); // Create the object
+			// Apply parameters
+		}
+	}
+	
+	
 	// An overloaded create function for level loading, if we already know where the object will be
 	public void Create(ObjectSet obj) {
 		GameObject tempEnv = null;

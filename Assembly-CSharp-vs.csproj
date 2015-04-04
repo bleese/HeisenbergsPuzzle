@@ -74,6 +74,8 @@
      <Compile Include="Assets\Scripts\UIScripts\PauseManager.cs" />
      <Compile Include="Assets\Scripts\UIScripts\SimpleImageToggle.cs" />
      <Compile Include="Assets\Scripts\UniversalHelperScript.cs" />
+     <Compile Include="Assets\Scripts\WorldManager\State.cs" />
+     <Compile Include="Assets\Scripts\WorldManager\WorldManagerScript.cs" />
      <None Include="Assets\Resources\Mazes\TLevel01.txt" />
      <None Include="Assets\Resources\Mazes\TLevel02.txt" />
      <None Include="Assets\Resources\Mazes\TLevel03.txt" />
