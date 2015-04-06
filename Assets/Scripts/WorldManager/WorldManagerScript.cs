@@ -32,13 +32,18 @@ public class WorldManagerScript : MonoBehaviour {
 	public void tunnelWorld(State stateObject) {
 		if (stateObject.newWorld != "") {
 			// Some function to deleteWorld
+			updateState (currentWorld); // Updates the state of our current world to save
+			deleteWorld (); // Removes the current world from the game
 			makeWorld (stateObject.newWorld);
 		}
 	}
 	
 	// We are trying to tunnel backwards to a parent world
 	public void tunnelOutWorld(string currentWorld) {
+	
 		if (!currentWorld.Equals ("root")) { // If we're at the root, we finish
+			updateState(currentWorld); // update the state of our current world
+			deleteWorld ();
 			// Assume the setup is WorldName142 to represent we are FOUR deep
 			currentWorld.Remove (currentWorld.Length - 1); // Remove the trailing character
 			Regex numberpattern = new Regex("[0-9]$"); // Check to see if the has a version at the end;
@@ -55,12 +60,26 @@ public class WorldManagerScript : MonoBehaviour {
 		List<State> states;
 		if (worlds.TryGetValue (name,out states)) {
 			foreach (State state in states) {
-				EditorManagerScript.Instance.Create (state);
+				EditorManagerScript.Instance.Create (state); // Creates all the states
 			}
 			currentWorld = name;
 		}
 	}
 	
+	// Deletes the current world, preserving the state
+	private void deleteWorld() {
+		EditorManagerScript.Instance.DeleteWorld();
+	}
+	
+	// Updates the current state of the world
+	private void updateState(string name) {
+		List<State> states;
+		if (worlds.TryGetValue (name, out states)) {
+			states = EditorManagerScript.Instance.GetStates(); // Gets the states of all the objects in the scene
+		}
+		// Call some function in EditorManager that scans the scene and sends the state back
+		
+	}
 	
 	public static WorldManagerScript Instance
 	{
@@ -72,4 +91,5 @@ public class WorldManagerScript : MonoBehaviour {
 			return instance;
 		}
 	}
+	
 }

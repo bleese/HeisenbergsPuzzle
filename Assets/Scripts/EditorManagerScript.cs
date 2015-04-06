@@ -158,12 +158,83 @@ public class EditorManagerScript : MonoBehaviour {
 		}
 	}
 	
+	public void DeleteWorld() {
+		foreach (GameObject obj in environments) {
+			Destroy (obj);
+		}
+		environments.RemoveAll ();
+	}
+	
+	// Scans through the list of IEnvironmentObjects and returns their current state
+	public List<State> GetStates() {
+		List<State> states = new List<State>();
+       	foreach (GameObject selectedEnvironment in environments) {
+       		State state = new State();
+			if (selectedEnvironment.tag == "Walls") {
+				state.name = "Barrier";
+			} else if (selectedEnvironment.tag == "EField") {
+				state.name = "ElectricField";
+			} else if (selectedEnvironment.tag == "MField") {
+				state.name = "MagneticField";
+			} else if (selectedEnvironment.tag == "Measurer") {
+				state.name = "Measurer";
+			} else if (selectedEnvironment.tag == "AntiMatter") {
+				state.name = "Antimatter";
+			} else if (selectedEnvironment.tag == "Teleporter") {
+				state.name = "Teleporter";
+			} else if (selectedEnvironment.tag == "Spawn") {
+				state.name = "SpawnPoint";	
+			} else if (selectedEnvironment.tag == "Gate") {
+				state.name = "Gate";
+			} else if (selectedEnvironment.tag == "Trigger") {
+				state.name = "TriggerPoint";
+			}
+			state.transform = selectedEnvironment.transform;
+			states.Add (state);
+       	}
+       	return states;
+	}
+	
 	// If we are given a "State" instead of an objectSet
 	public void Create(State obj) {
-		if (obj.name == "") { // identify the object
-			// TempEnv = instantiate(); // Create the object
-			// Apply parameters
-		}
+		GameObject tempEnv = null;
+		if (obj.name.Contains ("Barrier")) {
+			// NOTE, if EVEN then vertical, else horizontal. This implies that the final EVEN energy value is TWICe the total energy
+			// Example: Horizontal wall with 100 energy would have a togglestate of 201
+			tempEnv = Instantiate (wall,obj.transform.position, obj.transform.rotation) as GameObject;
+			tempEnv.transform = obj.transform;
+			//tempEnv.GetComponent<WallScript>().SetEnergy (obj.toggleState / 2);
+		} else if (obj.name.Contains("Antimatter")) {
+			tempEnv = Instantiate (antiMatter,obj.transform.position, obj.transform.rotation) as GameObject;
+			tempEnv.transform = obj.transform;
+		}  else if (obj.name.Contains("ElectricField")) {
+			tempEnv = Instantiate (efield,obj.transform.position, obj.transform.rotation) as GameObject;
+			tempEnv.transform = obj.transform;	
+		}  else if (obj.name.Contains("MagneticField")) {
+			tempEnv = Instantiate (mfield,obj.transform.position, obj.transform.rotation) as GameObject;
+			tempEnv.transform = obj.transform;
+		}  else if (obj.name.Contains("Measurer")) {
+			tempEnv = Instantiate (measurer,obj.transform.position, obj.transform.rotation) as GameObject;
+			tempEnv.transform = obj.transform;
+		}  else if (obj.name.Contains("SpawnPoint")) {
+			tempEnv = Instantiate (spawnPoint,obj.transform.position, obj.transform.rotation) as GameObject;
+			tempEnv.transform = obj.transform;
+		}  else if (obj.name.Contains("Teleporter")) {
+			tempEnv = Instantiate (teleporter,obj.transform.position, obj.transform.rotation) as GameObject;
+			tempEnv.transform = obj.transform;
+		} else if (obj.name.Contains("TriggerPoint")) {
+			tempEnv = Instantiate (triggerPoint,obj.transform.position, obj.transform.rotation) as GameObject;
+			tempEnv.transform = obj.transform;
+			//if (flags & TriggerFlags.MatterConversion != 0) {
+			//	tempEnv.GetComponent<TriggerPoint>().convertMatter = true;
+			//}
+		}  else if (obj.name.Contains("Gate")) {
+			tempEnv = Instantiate (gate,obj.transform.position, obj.transform.rotation) as GameObject;
+			tempEnv.transform = obj.transform;
+		}  
+		environments.Add (tempEnv);
+		selectedEnvironment = tempEnv;
+		selectedScript = getValidComponent (tempEnv);
 	}
 	
 	

@@ -49,6 +49,7 @@
      <Compile Include="Assets\Plugins\SimpleJSON.cs" />
      <None Include="Assets\Resources\Mazes\TLevel01.txt" />
      <None Include="Assets\Resources\Mazes\TLevel02.txt" />
+     <None Include="Assets\Resources\Mazes\TLevel03A.txt" />
      <None Include="Assets\Resources\Mazes\TLevel03.txt" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
